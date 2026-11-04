@@ -1,0 +1,1170 @@
+{
+  "rule": "every vertex weight <= level threshold",
+  "comparison": "<= (equality qualifies); unsafe means > threshold, including in all pruning",
+  "method": "Exact dyadic integer iterative-deepening search at scale 2^28, with state+last-edge failure memoization. Fraction replay confirms every supplied sequence, first clear, and conserved total.",
+  "independentMethod": "A separate exact-integer depth-limited search at scale 2^30, without commuting-edge pruning or optimistic-contact pruning, rules out every path of length optimum−1 or less. It uses only no-op removal, failed-state memoization, and the sound bound that one move removes at most one vertex whose value is strictly greater than the threshold.",
+  "levels": [
+    {
+      "id": "flush-01",
+      "name": {
+        "en": "A Fresh Start",
+        "zh": "冲个好头"
+      },
+      "optimalMoves": 1,
+      "moveLimit": 3,
+      "threshold": 55,
+      "initialTotal": 100,
+      "average": "50",
+      "sequenceEdgeIndices": [
+        0
+      ],
+      "sequenceLabels": [
+        "A–B"
+      ],
+      "finalFractions": [
+        "50",
+        "50"
+      ],
+      "finalPercentages": [
+        50.0,
+        50.0
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "80",
+          "20"
+        ],
+        [
+          "50",
+          "50"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=2 memo=0 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 0,
+        "solutionFound": false,
+        "visitedStates": 1,
+        "memoizedStates": 0,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-02",
+      "name": {
+        "en": "Mind the Queue",
+        "zh": "排队别急"
+      },
+      "optimalMoves": 3,
+      "moveLimit": 5,
+      "threshold": 40,
+      "initialTotal": 90,
+      "average": "30",
+      "sequenceEdgeIndices": [
+        0,
+        1,
+        0
+      ],
+      "sequenceLabels": [
+        "A–B",
+        "B–C",
+        "A–B"
+      ],
+      "finalFractions": [
+        "135/4",
+        "135/4",
+        "45/2"
+      ],
+      "finalPercentages": [
+        33.75,
+        33.75,
+        22.5
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "90",
+          "0",
+          "0"
+        ],
+        [
+          "45",
+          "45",
+          "0"
+        ],
+        [
+          "45",
+          "45/2",
+          "45/2"
+        ],
+        [
+          "135/4",
+          "135/4",
+          "45/2"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=2 memo=0 ms=0 solved=0\ndepth=2 visits=2 memo=0 ms=0 solved=0\ndepth=3 visits=4 memo=0 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 2,
+        "solutionFound": false,
+        "visitedStates": 2,
+        "memoizedStates": 0,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-03",
+      "name": {
+        "en": "Three’s a Crowd",
+        "zh": "三位请让让"
+      },
+      "optimalMoves": 4,
+      "moveLimit": 6,
+      "threshold": 55,
+      "initialTotal": 160,
+      "average": "160/3",
+      "sequenceEdgeIndices": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "sequenceLabels": [
+        "C–A",
+        "A–B",
+        "B–C",
+        "A–B"
+      ],
+      "finalFractions": [
+        "435/8",
+        "435/8",
+        "205/4"
+      ],
+      "finalPercentages": [
+        54.375,
+        54.375,
+        51.25
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "90",
+          "70",
+          "0"
+        ],
+        [
+          "45",
+          "70",
+          "45"
+        ],
+        [
+          "115/2",
+          "115/2",
+          "45"
+        ],
+        [
+          "115/2",
+          "205/4",
+          "205/4"
+        ],
+        [
+          "435/8",
+          "435/8",
+          "205/4"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=8 memo=0 ms=0 solved=0\ndepth=3 visits=14 memo=1 ms=0 solved=0\ndepth=4 visits=5 memo=0 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 3,
+        "solutionFound": false,
+        "visitedStates": 14,
+        "memoizedStates": 1,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-04",
+      "name": {
+        "en": "Porcelain Junction",
+        "zh": "瓷器岔路口"
+      },
+      "optimalMoves": 5,
+      "moveLimit": 8,
+      "threshold": 44,
+      "initialTotal": 160,
+      "average": "40",
+      "sequenceEdgeIndices": [
+        0,
+        1,
+        2,
+        1,
+        0
+      ],
+      "sequenceLabels": [
+        "A–B",
+        "A–C",
+        "A–D",
+        "A–C",
+        "A–B"
+      ],
+      "finalFractions": [
+        "695/16",
+        "695/16",
+        "335/8",
+        "125/4"
+      ],
+      "finalPercentages": [
+        43.4375,
+        43.4375,
+        41.875,
+        31.25
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "0",
+          "90",
+          "60",
+          "10"
+        ],
+        [
+          "45",
+          "45",
+          "60",
+          "10"
+        ],
+        [
+          "105/2",
+          "45",
+          "105/2",
+          "10"
+        ],
+        [
+          "125/4",
+          "45",
+          "105/2",
+          "125/4"
+        ],
+        [
+          "335/8",
+          "45",
+          "335/8",
+          "125/4"
+        ],
+        [
+          "695/16",
+          "695/16",
+          "335/8",
+          "125/4"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=6 memo=0 ms=0 solved=0\ndepth=3 visits=12 memo=1 ms=0 solved=0\ndepth=4 visits=28 memo=4 ms=0 solved=0\ndepth=5 visits=6 memo=0 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 4,
+        "solutionFound": false,
+        "visitedStates": 28,
+        "memoizedStates": 4,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-05",
+      "name": {
+        "en": "Round the U-Bend",
+        "zh": "回旋U形弯"
+      },
+      "optimalMoves": 5,
+      "moveLimit": 10,
+      "threshold": 35,
+      "initialTotal": 170,
+      "average": "34",
+      "sequenceEdgeIndices": [
+        3,
+        2,
+        3,
+        2,
+        3
+      ],
+      "sequenceLabels": [
+        "D–E",
+        "C–D",
+        "D–E",
+        "C–D",
+        "D–E"
+      ],
+      "finalFractions": [
+        "35",
+        "35",
+        "125/4",
+        "275/8",
+        "275/8"
+      ],
+      "finalPercentages": [
+        35.0,
+        35.0,
+        31.25,
+        34.375,
+        34.375
+      ],
+      "finalEqualsThreshold": [
+        0,
+        1
+      ],
+      "exactStates": [
+        [
+          "35",
+          "35",
+          "0",
+          "5",
+          "95"
+        ],
+        [
+          "35",
+          "35",
+          "0",
+          "50",
+          "50"
+        ],
+        [
+          "35",
+          "35",
+          "25",
+          "25",
+          "50"
+        ],
+        [
+          "35",
+          "35",
+          "25",
+          "75/2",
+          "75/2"
+        ],
+        [
+          "35",
+          "35",
+          "125/4",
+          "125/4",
+          "75/2"
+        ],
+        [
+          "35",
+          "35",
+          "125/4",
+          "275/8",
+          "275/8"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=5 memo=0 ms=0 solved=0\ndepth=2 visits=12 memo=0 ms=0 solved=0\ndepth=3 visits=32 memo=1 ms=0 solved=0\ndepth=4 visits=75 memo=5 ms=0 solved=0\ndepth=5 visits=6 memo=0 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 4,
+        "solutionFound": false,
+        "visitedStates": 117,
+        "memoizedStates": 5,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-06",
+      "name": {
+        "en": "Diamond Detour",
+        "zh": "菱形绕行"
+      },
+      "optimalMoves": 8,
+      "moveLimit": 11,
+      "threshold": 60,
+      "initialTotal": 290,
+      "average": "58",
+      "sequenceEdgeIndices": [
+        0,
+        4,
+        2,
+        3,
+        1,
+        0,
+        4,
+        3
+      ],
+      "sequenceLabels": [
+        "A–B",
+        "D–E",
+        "B–D",
+        "C–D",
+        "A–C",
+        "A–B",
+        "D–E",
+        "C–D"
+      ],
+      "finalFractions": [
+        "1915/32",
+        "1915/32",
+        "945/16",
+        "945/16",
+        "835/16"
+      ],
+      "finalPercentages": [
+        59.84375,
+        59.84375,
+        59.0625,
+        59.0625,
+        52.1875
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "100",
+          "35",
+          "75",
+          "75",
+          "5"
+        ],
+        [
+          "135/2",
+          "135/2",
+          "75",
+          "75",
+          "5"
+        ],
+        [
+          "135/2",
+          "135/2",
+          "75",
+          "40",
+          "40"
+        ],
+        [
+          "135/2",
+          "215/4",
+          "75",
+          "215/4",
+          "40"
+        ],
+        [
+          "135/2",
+          "215/4",
+          "515/8",
+          "515/8",
+          "40"
+        ],
+        [
+          "1055/16",
+          "215/4",
+          "1055/16",
+          "515/8",
+          "40"
+        ],
+        [
+          "1915/32",
+          "1915/32",
+          "1055/16",
+          "515/8",
+          "40"
+        ],
+        [
+          "1915/32",
+          "1915/32",
+          "1055/16",
+          "835/16",
+          "835/16"
+        ],
+        [
+          "1915/32",
+          "1915/32",
+          "945/16",
+          "945/16",
+          "835/16"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=1 memo=0 ms=0 solved=0\ndepth=3 visits=13 memo=1 ms=0 solved=0\ndepth=4 visits=38 memo=4 ms=0 solved=0\ndepth=5 visits=120 memo=14 ms=0 solved=0\ndepth=6 visits=365 memo=43 ms=0 solved=0\ndepth=7 visits=1093 memo=131 ms=0 solved=0\ndepth=8 visits=124 memo=12 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 7,
+        "solutionFound": false,
+        "visitedStates": 1638,
+        "memoizedStates": 131,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-07",
+      "name": {
+        "en": "Double Trouble",
+        "zh": "两翼告急"
+      },
+      "optimalMoves": 10,
+      "moveLimit": 13,
+      "threshold": 56,
+      "initialTotal": 325,
+      "average": "325/6",
+      "sequenceEdgeIndices": [
+        2,
+        1,
+        2,
+        1,
+        0,
+        1,
+        0,
+        4,
+        3,
+        4
+      ],
+      "sequenceLabels": [
+        "B–E",
+        "B–C",
+        "B–E",
+        "B–C",
+        "A–B",
+        "B–C",
+        "A–B",
+        "E–F",
+        "D–E",
+        "E–F"
+      ],
+      "finalFractions": [
+        "3565/64",
+        "3565/64",
+        "1595/32",
+        "835/16",
+        "1785/32",
+        "1785/32"
+      ],
+      "finalPercentages": [
+        55.703125,
+        55.703125,
+        49.84375,
+        52.1875,
+        55.78125,
+        55.78125
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "85",
+          "25",
+          "10",
+          "45",
+          "85",
+          "75"
+        ],
+        [
+          "85",
+          "55",
+          "10",
+          "45",
+          "55",
+          "75"
+        ],
+        [
+          "85",
+          "65/2",
+          "65/2",
+          "45",
+          "55",
+          "75"
+        ],
+        [
+          "85",
+          "175/4",
+          "65/2",
+          "45",
+          "175/4",
+          "75"
+        ],
+        [
+          "85",
+          "305/8",
+          "305/8",
+          "45",
+          "175/4",
+          "75"
+        ],
+        [
+          "985/16",
+          "985/16",
+          "305/8",
+          "45",
+          "175/4",
+          "75"
+        ],
+        [
+          "985/16",
+          "1595/32",
+          "1595/32",
+          "45",
+          "175/4",
+          "75"
+        ],
+        [
+          "3565/64",
+          "3565/64",
+          "1595/32",
+          "45",
+          "175/4",
+          "75"
+        ],
+        [
+          "3565/64",
+          "3565/64",
+          "1595/32",
+          "45",
+          "475/8",
+          "475/8"
+        ],
+        [
+          "3565/64",
+          "3565/64",
+          "1595/32",
+          "835/16",
+          "835/16",
+          "475/8"
+        ],
+        [
+          "3565/64",
+          "3565/64",
+          "1595/32",
+          "835/16",
+          "1785/32",
+          "1785/32"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=1 memo=0 ms=0 solved=0\ndepth=3 visits=14 memo=1 ms=0 solved=0\ndepth=4 visits=44 memo=5 ms=0 solved=0\ndepth=5 visits=119 memo=19 ms=0 solved=0\ndepth=6 visits=343 memo=58 ms=0 solved=0\ndepth=7 visits=1094 memo=164 ms=0 solved=0\ndepth=8 visits=3601 memo=480 ms=0 solved=0\ndepth=9 visits=12177 memo=1431 ms=1 solved=0\ndepth=10 visits=16749 memo=1600 ms=1 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 9,
+        "solutionFound": false,
+        "visitedStates": 16992,
+        "memoizedStates": 1427,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-08",
+      "name": {
+        "en": "Bull in a Bathroom",
+        "zh": "牛气洗手间"
+      },
+      "optimalMoves": 12,
+      "moveLimit": 15,
+      "threshold": 50,
+      "initialTotal": 245,
+      "average": "49",
+      "sequenceEdgeIndices": [
+        3,
+        2,
+        0,
+        3,
+        4,
+        0,
+        4,
+        0,
+        1,
+        3,
+        4,
+        1
+      ],
+      "sequenceLabels": [
+        "A–D",
+        "C–A",
+        "A–B",
+        "A–D",
+        "B–E",
+        "A–B",
+        "B–E",
+        "A–B",
+        "B–C",
+        "A–D",
+        "B–E",
+        "B–C"
+      ],
+      "finalFractions": [
+        "1595/32",
+        "6335/128",
+        "6335/128",
+        "1595/32",
+        "2965/64"
+      ],
+      "finalPercentages": [
+        49.84375,
+        49.4921875,
+        49.4921875,
+        49.84375,
+        46.328125
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "60",
+          "25",
+          "55",
+          "80",
+          "25"
+        ],
+        [
+          "70",
+          "25",
+          "55",
+          "70",
+          "25"
+        ],
+        [
+          "125/2",
+          "25",
+          "125/2",
+          "70",
+          "25"
+        ],
+        [
+          "175/4",
+          "175/4",
+          "125/2",
+          "70",
+          "25"
+        ],
+        [
+          "455/8",
+          "175/4",
+          "125/2",
+          "455/8",
+          "25"
+        ],
+        [
+          "455/8",
+          "275/8",
+          "125/2",
+          "455/8",
+          "275/8"
+        ],
+        [
+          "365/8",
+          "365/8",
+          "125/2",
+          "455/8",
+          "275/8"
+        ],
+        [
+          "365/8",
+          "40",
+          "125/2",
+          "455/8",
+          "40"
+        ],
+        [
+          "685/16",
+          "685/16",
+          "125/2",
+          "455/8",
+          "40"
+        ],
+        [
+          "685/16",
+          "1685/32",
+          "1685/32",
+          "455/8",
+          "40"
+        ],
+        [
+          "1595/32",
+          "1685/32",
+          "1685/32",
+          "1595/32",
+          "40"
+        ],
+        [
+          "1595/32",
+          "2965/64",
+          "1685/32",
+          "1595/32",
+          "2965/64"
+        ],
+        [
+          "1595/32",
+          "6335/128",
+          "6335/128",
+          "1595/32",
+          "2965/64"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=1 memo=0 ms=0 solved=0\ndepth=3 visits=29 memo=1 ms=0 solved=0\ndepth=4 visits=117 memo=5 ms=0 solved=0\ndepth=5 visits=368 memo=18 ms=0 solved=0\ndepth=6 visits=1013 memo=57 ms=0 solved=0\ndepth=7 visits=2735 memo=169 ms=0 solved=0\ndepth=8 visits=7786 memo=485 ms=0 solved=0\ndepth=9 visits=21803 memo=1368 ms=1 solved=0\ndepth=10 visits=61955 memo=3837 ms=4 solved=0\ndepth=11 visits=177294 memo=10757 ms=13 solved=0\ndepth=12 visits=65134 memo=4216 ms=4 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 11,
+        "solutionFound": false,
+        "visitedStates": 222901,
+        "memoizedStates": 10503,
+        "milliseconds": 4,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-09",
+      "name": {
+        "en": "The Long Queue",
+        "zh": "长廊大排队"
+      },
+      "optimalMoves": 14,
+      "moveLimit": 14,
+      "threshold": 48,
+      "initialTotal": 215,
+      "average": "43",
+      "sequenceEdgeIndices": [
+        1,
+        0,
+        2,
+        3,
+        2,
+        1,
+        0,
+        2,
+        1,
+        0,
+        3,
+        2,
+        1,
+        0
+      ],
+      "sequenceLabels": [
+        "B–C",
+        "A–B",
+        "C–D",
+        "D–E",
+        "C–D",
+        "B–C",
+        "A–B",
+        "C–D",
+        "B–C",
+        "A–B",
+        "D–E",
+        "C–D",
+        "B–C",
+        "A–B"
+      ],
+      "finalFractions": [
+        "12215/256",
+        "12215/256",
+        "5795/128",
+        "2585/64",
+        "1085/32"
+      ],
+      "finalPercentages": [
+        47.71484375,
+        47.71484375,
+        45.2734375,
+        40.390625,
+        33.90625
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "65",
+          "85",
+          "25",
+          "25",
+          "15"
+        ],
+        [
+          "65",
+          "55",
+          "55",
+          "25",
+          "15"
+        ],
+        [
+          "60",
+          "60",
+          "55",
+          "25",
+          "15"
+        ],
+        [
+          "60",
+          "60",
+          "40",
+          "40",
+          "15"
+        ],
+        [
+          "60",
+          "60",
+          "40",
+          "55/2",
+          "55/2"
+        ],
+        [
+          "60",
+          "60",
+          "135/4",
+          "135/4",
+          "55/2"
+        ],
+        [
+          "60",
+          "375/8",
+          "375/8",
+          "135/4",
+          "55/2"
+        ],
+        [
+          "855/16",
+          "855/16",
+          "375/8",
+          "135/4",
+          "55/2"
+        ],
+        [
+          "855/16",
+          "855/16",
+          "645/16",
+          "645/16",
+          "55/2"
+        ],
+        [
+          "855/16",
+          "375/8",
+          "375/8",
+          "645/16",
+          "55/2"
+        ],
+        [
+          "1605/32",
+          "1605/32",
+          "375/8",
+          "645/16",
+          "55/2"
+        ],
+        [
+          "1605/32",
+          "1605/32",
+          "375/8",
+          "1085/32",
+          "1085/32"
+        ],
+        [
+          "1605/32",
+          "1605/32",
+          "2585/64",
+          "2585/64",
+          "1085/32"
+        ],
+        [
+          "1605/32",
+          "5795/128",
+          "5795/128",
+          "2585/64",
+          "1085/32"
+        ],
+        [
+          "12215/256",
+          "12215/256",
+          "5795/128",
+          "2585/64",
+          "1085/32"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=4 memo=0 ms=0 solved=0\ndepth=3 visits=7 memo=1 ms=0 solved=0\ndepth=4 visits=18 memo=4 ms=0 solved=0\ndepth=5 visits=44 memo=10 ms=0 solved=0\ndepth=6 visits=97 memo=22 ms=0 solved=0\ndepth=7 visits=203 memo=46 ms=0 solved=0\ndepth=8 visits=426 memo=94 ms=0 solved=0\ndepth=9 visits=891 memo=189 ms=0 solved=0\ndepth=10 visits=1823 memo=373 ms=0 solved=0\ndepth=11 visits=3726 memo=733 ms=0 solved=0\ndepth=12 visits=7500 memo=1432 ms=1 solved=0\ndepth=13 visits=15097 memo=2786 ms=2 solved=0\ndepth=14 visits=15 memo=0 ms=0 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 13,
+        "solutionFound": false,
+        "visitedStates": 24757,
+        "memoizedStates": 2786,
+        "milliseconds": 0,
+        "sequence": []
+      }
+    },
+    {
+      "id": "flush-10",
+      "name": {
+        "en": "Royal Flush",
+        "zh": "皇家大冲关"
+      },
+      "optimalMoves": 16,
+      "moveLimit": 16,
+      "threshold": 48,
+      "initialTotal": 235,
+      "average": "47",
+      "sequenceEdgeIndices": [
+        4,
+        3,
+        1,
+        4,
+        3,
+        1,
+        2,
+        3,
+        2,
+        4,
+        3,
+        2,
+        0,
+        4,
+        3,
+        4
+      ],
+      "sequenceLabels": [
+        "D–E",
+        "C–D",
+        "B–C",
+        "D–E",
+        "C–D",
+        "B–C",
+        "C–A",
+        "C–D",
+        "C–A",
+        "D–E",
+        "C–D",
+        "C–A",
+        "A–B",
+        "D–E",
+        "C–D",
+        "D–E"
+      ],
+      "finalFractions": [
+        "23995/512",
+        "23995/512",
+        "2925/64",
+        "24465/512",
+        "24465/512"
+      ],
+      "finalPercentages": [
+        46.865234375,
+        46.865234375,
+        45.703125,
+        47.783203125,
+        47.783203125
+      ],
+      "finalEqualsThreshold": [],
+      "exactStates": [
+        [
+          "10",
+          "40",
+          "40",
+          "65",
+          "80"
+        ],
+        [
+          "10",
+          "40",
+          "40",
+          "145/2",
+          "145/2"
+        ],
+        [
+          "10",
+          "40",
+          "225/4",
+          "225/4",
+          "145/2"
+        ],
+        [
+          "10",
+          "385/8",
+          "385/8",
+          "225/4",
+          "145/2"
+        ],
+        [
+          "10",
+          "385/8",
+          "385/8",
+          "515/8",
+          "515/8"
+        ],
+        [
+          "10",
+          "385/8",
+          "225/4",
+          "225/4",
+          "515/8"
+        ],
+        [
+          "10",
+          "835/16",
+          "835/16",
+          "225/4",
+          "515/8"
+        ],
+        [
+          "995/32",
+          "835/16",
+          "995/32",
+          "225/4",
+          "515/8"
+        ],
+        [
+          "995/32",
+          "835/16",
+          "2795/64",
+          "2795/64",
+          "515/8"
+        ],
+        [
+          "4785/128",
+          "835/16",
+          "4785/128",
+          "2795/64",
+          "515/8"
+        ],
+        [
+          "4785/128",
+          "835/16",
+          "4785/128",
+          "6915/128",
+          "6915/128"
+        ],
+        [
+          "4785/128",
+          "835/16",
+          "2925/64",
+          "2925/64",
+          "6915/128"
+        ],
+        [
+          "10635/256",
+          "835/16",
+          "10635/256",
+          "2925/64",
+          "6915/128"
+        ],
+        [
+          "23995/512",
+          "23995/512",
+          "10635/256",
+          "2925/64",
+          "6915/128"
+        ],
+        [
+          "23995/512",
+          "23995/512",
+          "10635/256",
+          "12765/256",
+          "12765/256"
+        ],
+        [
+          "23995/512",
+          "23995/512",
+          "2925/64",
+          "2925/64",
+          "12765/256"
+        ],
+        [
+          "23995/512",
+          "23995/512",
+          "2925/64",
+          "24465/512",
+          "24465/512"
+        ]
+      ],
+      "exhaustiveSearch": "depth=0 visits=1 memo=0 ms=0 solved=0\ndepth=1 visits=1 memo=0 ms=0 solved=0\ndepth=2 visits=5 memo=0 ms=0 solved=0\ndepth=3 visits=17 memo=1 ms=0 solved=0\ndepth=4 visits=60 memo=5 ms=0 solved=0\ndepth=5 visits=188 memo=16 ms=0 solved=0\ndepth=6 visits=579 memo=44 ms=0 solved=0\ndepth=7 visits=1755 memo=120 ms=0 solved=0\ndepth=8 visits=4944 memo=321 ms=0 solved=0\ndepth=9 visits=13210 memo=840 ms=0 solved=0\ndepth=10 visits=34524 memo=2164 ms=2 solved=0\ndepth=11 visits=89300 memo=5547 ms=6 solved=0\ndepth=12 visits=229706 memo=14123 ms=20 solved=0\ndepth=13 visits=589349 memo=35809 ms=48 solved=0\ndepth=14 visits=1508925 memo=90497 ms=154 solved=0\ndepth=15 visits=3854118 memo=227976 ms=326 solved=0\ndepth=16 visits=925784 memo=54935 ms=100 solved=1\n",
+      "independentExhaustiveSearch": {
+        "depth": 15,
+        "solutionFound": false,
+        "visitedStates": 5167364,
+        "memoizedStates": 227968,
+        "milliseconds": 158,
+        "sequence": []
+      }
+    }
+  ]
+}

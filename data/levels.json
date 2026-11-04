@@ -1,0 +1,732 @@
+[
+  {
+    "id": "flush-01",
+    "name": {
+      "en": "A Fresh Start",
+      "zh": "冲个好头"
+    },
+    "difficulty": "easy",
+    "tagline": {
+      "en": "Two bowls. One pipe. A very small emergency.",
+      "zh": "两个马桶，一根管道，一场小小的救急。"
+    },
+    "shape": "pair",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0.5
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ]
+    ],
+    "initial": [
+      80,
+      20
+    ],
+    "threshold": 55,
+    "moveLimit": 3,
+    "optimalMoves": 1,
+    "hints": {
+      "en": [
+        "A busy toilet and a quieter toilet can share the load.",
+        "Each click replaces both amounts with their average."
+      ],
+      "zh": [
+        "让繁忙的马桶和空闲的马桶分担一下。",
+        "每次点击后，两端的数值都会变成它们的平均值。"
+      ]
+    }
+  },
+  {
+    "id": "flush-02",
+    "name": {
+      "en": "Mind the Queue",
+      "zh": "排队别急"
+    },
+    "difficulty": "easy",
+    "tagline": {
+      "en": "The last cubicle has room. Pass it on.",
+      "zh": "最后一间还有余量，把负担传过去。"
+    },
+    "shape": "path3",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "initial": [
+      90,
+      0,
+      0
+    ],
+    "threshold": 40,
+    "moveLimit": 5,
+    "optimalMoves": 3,
+    "hints": {
+      "en": [
+        "The far toilet has space to help.",
+        "A toilet that is already safe may still need to share again."
+      ],
+      "zh": [
+        "远端的马桶还有空间可以帮忙。",
+        "已经达标的马桶，可能还需要再分担一次。"
+      ]
+    }
+  },
+  {
+    "id": "flush-03",
+    "name": {
+      "en": "Three’s a Crowd",
+      "zh": "三位请让让"
+    },
+    "difficulty": "easy",
+    "tagline": {
+      "en": "A crowded little triangle. Keep your cool.",
+      "zh": "三角小隔间有点挤，冷静分配就好。"
+    },
+    "shape": "triangle",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0.5,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "initial": [
+      90,
+      70,
+      0
+    ],
+    "threshold": 55,
+    "moveLimit": 6,
+    "optimalMoves": 4,
+    "hints": {
+      "en": [
+        "The emptiest bowl gives you room to work.",
+        "A toilet at exactly the limit is ready. Check the others before sharing again."
+      ],
+      "zh": [
+        "先利用最空的马桶腾出周转空间。",
+        "恰好等于上限的马桶也已达标，再次分担前先看看其他马桶。"
+      ]
+    }
+  },
+  {
+    "id": "flush-04",
+    "name": {
+      "en": "Porcelain Junction",
+      "zh": "瓷器岔路口"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "All traffic goes through the middle.",
+      "zh": "所有负担，都要经过中间这一站。"
+    },
+    "shape": "star",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "D",
+        "x": 0.5,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "initial": [
+      0,
+      90,
+      60,
+      10
+    ],
+    "threshold": 44,
+    "moveLimit": 8,
+    "optimalMoves": 5,
+    "hints": {
+      "en": [
+        "The center is a transfer station. Keep some room there.",
+        "Exactly 44% counts as ready. Keep every other toilet at or below its limit too."
+      ],
+      "zh": [
+        "中间是周转站，要给它留一点空间。",
+        "恰好 44% 也达标，其他马桶也要同时不超过上限。"
+      ]
+    }
+  },
+  {
+    "id": "flush-05",
+    "name": {
+      "en": "Round the U-Bend",
+      "zh": "回旋U形弯"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "There is more than one way around this mess.",
+      "zh": "绕一圈，或许就有新的解法。"
+    },
+    "shape": "cycle5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0.5,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 0.5
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ],
+    "initial": [
+      35,
+      35,
+      0,
+      5,
+      95
+    ],
+    "threshold": 35,
+    "moveLimit": 10,
+    "optimalMoves": 5,
+    "hints": {
+      "en": [
+        "The loop gives you two routes out of a busy corner.",
+        "Toilets starting at the limit are ready already, but can become too full if you share again."
+      ],
+      "zh": [
+        "环形管道提供了两条疏散路线。",
+        "一开始恰好等于上限的马桶已经达标，但再次分担后也可能变得太满。"
+      ]
+    }
+  },
+  {
+    "id": "flush-06",
+    "name": {
+      "en": "Diamond Detour",
+      "zh": "菱形绕行"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "A fancy floor plan with a very useful back room.",
+      "zh": "布局很讲究，后排那一间尤其有用。"
+    },
+    "shape": "kite",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "B",
+        "x": 0.5,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0.45,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      100,
+      35,
+      75,
+      75,
+      5
+    ],
+    "threshold": 60,
+    "moveLimit": 11,
+    "optimalMoves": 8,
+    "hints": {
+      "en": [
+        "The toilet at the end of the tail has room to spare.",
+        "Two crowded toilets cannot make each other safe on their own."
+      ],
+      "zh": [
+        "尾端的马桶还有不少余量。",
+        "两个都太满的马桶，无法只靠互相分担就同时达标。"
+      ]
+    }
+  },
+  {
+    "id": "flush-07",
+    "name": {
+      "en": "Double Trouble",
+      "zh": "两翼告急"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Two wings. One bridge. No time for a blockage.",
+      "zh": "两侧隔间，一座桥梁，可别卡在中间。"
+    },
+    "shape": "double_t",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "F",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "initial": [
+      85,
+      25,
+      10,
+      45,
+      85,
+      75
+    ],
+    "threshold": 56,
+    "moveLimit": 13,
+    "optimalMoves": 10,
+    "hints": {
+      "en": [
+        "The middle pipe lets one wing borrow space from the other.",
+        "An end toilet can help the opposite wing through the central junctions."
+      ],
+      "zh": [
+        "中间的连接让两侧可以互相借用空间。",
+        "末端的马桶也能通过中间节点，帮助另一侧分担。"
+      ]
+    }
+  },
+  {
+    "id": "flush-08",
+    "name": {
+      "en": "Bull in a Bathroom",
+      "zh": "牛气洗手间"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Two stubborn horns and a triangle to tame them.",
+      "zh": "两只倔强的角，要靠三角核心来调节。"
+    },
+    "shape": "bull",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0.5,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 0
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "initial": [
+      60,
+      25,
+      55,
+      80,
+      25
+    ],
+    "threshold": 50,
+    "moveLimit": 15,
+    "optimalMoves": 12,
+    "hints": {
+      "en": [
+        "Each horn has only one pipe. Prepare its neighbor before sharing.",
+        "The triangle can shift spare capacity between the horns."
+      ],
+      "zh": [
+        "每只角都只有一条管道，先让它的邻居腾出余量。",
+        "三角核心可以把可用空间在两只角之间转移。"
+      ]
+    }
+  },
+  {
+    "id": "flush-09",
+    "name": {
+      "en": "The Long Queue",
+      "zh": "长廊大排队"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "A long corridor. A short allowance. Every move counts.",
+      "zh": "走廊很长，步数很紧，每一步都要算好。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      65,
+      85,
+      25,
+      25,
+      15
+    ],
+    "threshold": 48,
+    "moveLimit": 14,
+    "optimalMoves": 14,
+    "hints": {
+      "en": [
+        "Spare capacity must travel through the corridor one connection at a time.",
+        "Repeatedly mixing one pair cannot move the load far enough."
+      ],
+      "zh": [
+        "可用空间必须沿着走廊，一条连接一条连接地传递。",
+        "一直重复同一对马桶，无法让负担走得足够远。"
+      ]
+    }
+  },
+  {
+    "id": "flush-10",
+    "name": {
+      "en": "Royal Flush",
+      "zh": "皇家大冲关"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "The grand finale. Leave every throne ready to flush.",
+      "zh": "压轴大考，让每一座宝座都准备好冲水。"
+    },
+    "shape": "lollipop",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      10,
+      40,
+      40,
+      65,
+      80
+    ],
+    "threshold": 48,
+    "moveLimit": 16,
+    "optimalMoves": 16,
+    "hints": {
+      "en": [
+        "The triangle is a buffer. The farthest toilet depends entirely on its neighbor.",
+        "Prepare room before each transfer; the biggest number is not always the best next move."
+      ],
+      "zh": [
+        "三角区是缓冲区，最远的马桶完全依赖它的邻居。",
+        "每次分担前先腾出空间，数值最大的马桶不一定是下一步的最佳选择。"
+      ]
+    }
+  }
+]
