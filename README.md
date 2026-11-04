@@ -8,6 +8,8 @@ This is the **10-level testing edition**: every level is available from the star
 
 ## Play
 
+**[Play Flush Hour online / 在线游玩《冲冲大作战》](https://junglyhh.github.io/flush_hour/)**
+
 Open **[index.html](index.html)** in a modern web browser, or download **[flush_hour.html](flush_hour.html)** and open it locally. The two files are identical. Each contains all game code, styles, level data, and SVG artwork; neither needs an installation, server, internet connection, or external asset.
 
 If a file-preview application displays a static page, open the HTML in a browser that runs JavaScript.
