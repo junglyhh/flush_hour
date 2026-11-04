@@ -28,8 +28,27 @@ def build_bytes() -> bytes:
         raise ValueError("The verified minimum move count must increase at every level.")
     if b"</script" in level_data.lower():
         raise ValueError("Level data must not contain an unescaped closing script tag.")
+    quip_data = (ROOT / "data" / "victory-quips.json").read_bytes()
+    quips = json.loads(quip_data)
+    if not isinstance(quips, list) or len(quips) != 50:
+        raise ValueError("The victory collection must contain exactly 50 bilingual quips.")
+    for language, limit in (("en", 45), ("zh", 16)):
+        texts = []
+        for quip in quips:
+            if not isinstance(quip, dict) or set(quip) != {"en", "zh"}:
+                raise ValueError("Every victory quip must contain English and Chinese text.")
+            text = quip[language]
+            if (not isinstance(text, str) or not text.strip() or text != text.strip()
+                    or len(text) > limit or "\n" in text or "\r" in text):
+                raise ValueError(f"Victory quips in {language} must stay within {limit} characters on one line.")
+            texts.append(text)
+        if len(set(texts)) != len(texts):
+            raise ValueError(f"Victory quips in {language} must be distinct.")
+    if b"</script" in quip_data.lower():
+        raise ValueError("Victory quips must not contain an unescaped closing script tag.")
     substitutions = {
         b"__LEVEL_DATA__": level_data,
+        b"__VICTORY_QUIPS__": quip_data,
         b"__RULES_CODE__": (ROOT / "src" / "game-core.js").read_bytes(),
         b"__TOILET_CODE__": (ROOT / "src" / "toilet-visual.js").read_bytes(),
         b"__CAMPAIGN_CODE__": (ROOT / "src" / "campaign.js").read_bytes(),

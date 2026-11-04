@@ -19,7 +19,7 @@ If a file-preview application displays a static page, open the HTML in a browser
 1. **Tap anywhere along a pipe.** The two connected toilets receive their average waste level. For example, 80% and 20% become 50% and 50%. Tapping equal endpoints does not consume a move.
 2. **Get every toilet at or below the limit, simultaneously, within the move allowance.** Equality counts. If the limit is 35%, a toilet at exactly 35% is ready. A later move can make a ready toilet too full again.
 3. **Unlock the next room.** A successful clear immediately opens the next level, before the celebration flush. Future rooms stay locked; completed rooms remain available for replay.
-4. **Enjoy the flush.** The congratulatory dialog offers **Flush them all**. Watch the water swirl and every waste level fall to exactly 0%. This reward costs no move and cannot bypass the puzzle.
+4. **Enjoy the flush.** The congratulatory dialog offers **Flush them all**. Each clear displays a random short toilet quip from 50 English/Chinese pairs, with no immediate repeat during the session. Watch the water swirl and every waste level fall to exactly 0%. This reward costs no move and cannot bypass the puzzle.
 
 Percentages describe each toilet’s own fill level; their combined total need not be 100%. Averaging preserves the combined amount until the victory flush removes it.
 
@@ -84,7 +84,7 @@ Every threshold uses **≤**: equality counts. The minimum effective move count 
 
 《冲冲大作战》共有 **30 关**，从简单到大师，所需最少步数从第 1 关的 **1 步**逐关增加到第 30 关的 **30 步**。图上的每个顶点都是一个小马桶，污物量以百分比显示。每次点击水管，将两端污物量替换为平均值；两端已相等时不消耗步数。
 
-在步数上限内，让每个马桶同时 **低于或等于本关上限**，即可通关并立即解锁下一关，无需先完成冲水。祝贺窗口中的“一键冲水”会播放旋转水流动画，最后让所有马桶的数值归零。已通关的关卡可以随时重玩，撤销或重新开始不会收回已获得的解锁。
+在步数上限内，让每个马桶同时 **低于或等于本关上限**，即可通关并立即解锁下一关，无需先完成冲水。通关弹窗会从 50 组中英双语短句中随机挑选一句，本次游玩中不会连续重复；短句和紧凑布局让冲水按钮保持易见。祝贺窗口中的“一键冲水”会播放旋转水流动画，最后让所有马桶的数值归零。已通关的关卡可以随时重玩，撤销或重新开始不会收回已获得的解锁。
 
 每个百分比代表对应马桶的污物量，总和不必等于 100%。平均分配保持总量不变，只有通关奖励中的冲水会清空总量。
 
@@ -126,6 +126,7 @@ node tests/run.cjs
 | `src/share.js` | Sharing dialog, platform links, native share, clipboard, embedded QR / 分享弹窗、平台链接、系统分享、复制及二维码 |
 | `src/toilet-visual.js` | Inline toilet and flush artwork / 马桶与冲水图案 |
 | `data/levels.json` | 30 levels and bilingual conceptual hints / 三十关数据及双语提示 |
+| `data/victory-quips.json` | 50 short bilingual victory quips / 五十组中英双语通关短句 |
 | `scripts/build.py` | Deterministic standalone HTML build / 确定性的独立 HTML 构建 |
 | `tests/` | Rules, application-state, sharing, and responsive geometry checks / 规则、状态、分享及布局检查 |
 | `tests/fixtures/verification.json` | Developer-only shortest-solution certificates; contains spoilers / 仅供开发使用的最短解凭证，含剧透 |

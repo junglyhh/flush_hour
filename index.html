@@ -26,6 +26,42 @@ dialog{border:1.5px solid #9cbba8;border-radius:27px;padding:0;max-width:min(520
 @media(max-width:520px){.brand-name{font-size:26px}.brand{gap:7px}.brand-icon{width:39px;height:43px}.brand-sub{font-size:7.5px;letter-spacing:.8px}.header{gap:7px}}
 @media(max-width:370px){.brand-name{font-size:22px}.brand-sub{font-size:7px}.header-tools .btn{min-height:32px;padding:6px}.header-tools .icon-btn,.header-tools #guideBtn,.header-tools .share-btn{width:32px}.header-tools .lang-btn{min-width:40px}.header{padding:0;gap:6px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Keep the victory action visible, even when a short screen needs content scrolling. */
+.victory-dialog{display:flex;flex-direction:column;max-height:calc(100dvh - 34px);padding:24px 22px 18px}
+.victory-dialog .victory-content{min-height:0;overflow:auto;overscroll-behavior:contain}
+.victory-dialog .victory-content:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:12px}
+.victory-dialog .dialog-art{width:76px;height:78px;margin-bottom:10px}
+.victory-dialog .dialog-art svg{width:58px;height:68px}
+.victory-dialog .dialog-eyebrow{margin-bottom:6px;padding:0 24px;line-height:1.3}
+.victory-dialog .dialog-title{font-size:26px;margin-bottom:8px}
+.victory-dialog .victory-quip{font-size:14px;line-height:1.4;margin:0}
+.victory-dialog .unlock-notice{font-size:11px;line-height:1.4;margin-top:8px}
+.victory-dialog .achievement-chip{font-size:10px;line-height:1.4;padding:4px 8px;margin-top:8px}
+.victory-dialog .dialog-stats{margin:10px 0 0}
+.victory-dialog .dialog-stat{padding:8px}
+.victory-dialog .dialog-stat strong{font-size:20px;line-height:1.2}
+.victory-dialog .dialog-stat span{line-height:1.2;margin-top:2px}
+.victory-dialog .victory-actions{flex:0 0 auto;padding-top:12px;background:var(--paper)}
+.victory-dialog .dialog-primary{min-height:49px}
+.victory-dialog .dialog-secondary{margin-top:6px;padding:6px;min-height:30px}
+@media(max-height:600px){
+  .victory-dialog{padding:18px 20px 14px}
+  .victory-dialog .dialog-art{width:48px;height:50px;margin-bottom:6px}
+  .victory-dialog .dialog-art svg{width:38px;height:44px}
+  .victory-dialog .dialog-title{font-size:24px}
+  .victory-dialog .victory-quip{font-size:13px}
+}
+@media(max-height:500px){
+  .victory-dialog{padding:16px 18px 12px}
+  .victory-dialog .dialog-art{display:none}
+  .victory-dialog .dialog-title{font-size:22px;margin-bottom:6px}
+  .victory-dialog .dialog-eyebrow{margin-bottom:4px}
+  .victory-dialog .achievement-chip{margin-top:6px;padding:3px 8px}
+  .victory-dialog .dialog-stats{margin-top:8px}
+  .victory-dialog .dialog-stat{padding:6px}
+  .victory-dialog .victory-actions{padding-top:8px}
+}
 </style>
 </head>
 <body>
@@ -2878,13 +2914,216 @@ const FlushSharing = (() => {
 
 (() => {
 const LEVELS = JSON.parse(document.getElementById('level-data').textContent);
+const VICTORY_QUIPS = [
+  {
+    "en": "The porcelain committee approves.",
+    "zh": "瓷器委员会一致通过。"
+  },
+  {
+    "en": "Your throne has found its hero.",
+    "zh": "王座终于等到英雄了。"
+  },
+  {
+    "en": "These pipes deserve a tiny parade.",
+    "zh": "给水管办个迷你庆功会。"
+  },
+  {
+    "en": "The bowls are holding their applause.",
+    "zh": "马桶们正憋着掌声呢。"
+  },
+  {
+    "en": "The restroom just took a deep breath.",
+    "zh": "洗手间终于松了口气。"
+  },
+  {
+    "en": "The plunger is taking the afternoon off.",
+    "zh": "皮搋子下午放假啦。"
+  },
+  {
+    "en": "A royal flush awaits your command.",
+    "zh": "皇家冲水，等你一声令下。"
+  },
+  {
+    "en": "Even the tiles look impressed.",
+    "zh": "连瓷砖都看呆了。"
+  },
+  {
+    "en": "Your pipes just earned a gold star.",
+    "zh": "水管喜提一朵小红花。"
+  },
+  {
+    "en": "The queue has stopped writing complaints.",
+    "zh": "排队的人终于收起投诉信。"
+  },
+  {
+    "en": "You made porcelain problems look easy.",
+    "zh": "瓷器难题，被你轻松拿下。"
+  },
+  {
+    "en": "The toilet brush wants your autograph.",
+    "zh": "马桶刷排队找你签名。"
+  },
+  {
+    "en": "The plumber is asking you for tips.",
+    "zh": "水管工也来向你取经了。"
+  },
+  {
+    "en": "That was a very moving performance.",
+    "zh": "这场表演，流畅得很。"
+  },
+  {
+    "en": "The cistern saved you a front-row seat.",
+    "zh": "水箱给你留了贵宾席。"
+  },
+  {
+    "en": "A clean sweep starts with one big whoosh.",
+    "zh": "再来一声哗啦，漂亮收工。"
+  },
+  {
+    "en": "The pipes have formed your fan club.",
+    "zh": "水管后援会正式成立。"
+  },
+  {
+    "en": "Your bathroom budget is now mostly confetti.",
+    "zh": "洗手间经费全换成彩纸啦。"
+  },
+  {
+    "en": "The bowls are ready for their victory lap.",
+    "zh": "马桶们准备绕圈庆功。"
+  },
+  {
+    "en": "This throne room runs on good decisions.",
+    "zh": "这座王座厅，靠你来调度。"
+  },
+  {
+    "en": "The clog has left the group chat.",
+    "zh": "堵塞已退出群聊。"
+  },
+  {
+    "en": "The plumbing union requests a snack break.",
+    "zh": "水管工会申请加餐。"
+  },
+  {
+    "en": "Your next promotion comes with a lid.",
+    "zh": "下次升职，自带马桶盖。"
+  },
+  {
+    "en": "The water is practicing its dramatic exit.",
+    "zh": "水花正在排练华丽退场。"
+  },
+  {
+    "en": "A standing ovation would suit this seat.",
+    "zh": "给这张座位来个起立鼓掌。"
+  },
+  {
+    "en": "The mop brought popcorn for the finale.",
+    "zh": "拖把抱着爆米花等收尾。"
+  },
+  {
+    "en": "The toilet roll is rolling out the carpet.",
+    "zh": "卫生纸正忙着铺红毯。"
+  },
+  {
+    "en": "Those rubber gloves deserve a cape.",
+    "zh": "橡胶手套也该披上披风。"
+  },
+  {
+    "en": "The bath mat is doing its happy shuffle.",
+    "zh": "地垫正跳着开心小碎步。"
+  },
+  {
+    "en": "Your pipes are finally on speaking terms.",
+    "zh": "水管们终于聊到一块儿了。"
+  },
+  {
+    "en": "A little teamwork goes a long U-bend.",
+    "zh": "齐心协力，U形弯也让路。"
+  },
+  {
+    "en": "The drain is clearing its throat.",
+    "zh": "下水口正在清嗓子。"
+  },
+  {
+    "en": "You taught these bowls some table manners.",
+    "zh": "你把马桶教得彬彬有礼。"
+  },
+  {
+    "en": "The porcelain orchestra is ready.",
+    "zh": "瓷器交响乐团准备就绪。"
+  },
+  {
+    "en": "The pipes have no more plot twists.",
+    "zh": "这回水管不演反转了。"
+  },
+  {
+    "en": "The rubber duck is taking notes.",
+    "zh": "小黄鸭已经掏出笔记本。"
+  },
+  {
+    "en": "Your toilet has better timing than my alarm.",
+    "zh": "这马桶的节奏比闹钟还准。"
+  },
+  {
+    "en": "Please accept this imaginary golden seat.",
+    "zh": "请收下这只想象中的金座圈。"
+  },
+  {
+    "en": "The squeaky hinge just sang your praises.",
+    "zh": "吱呀作响的铰链也夸你。"
+  },
+  {
+    "en": "All aboard the express to Whooshville.",
+    "zh": "开往哗啦镇的快车就位。"
+  },
+  {
+    "en": "The elbow pipe is giving you a thumbs-up.",
+    "zh": "弯头水管正给你竖大拇指。"
+  },
+  {
+    "en": "This seat has never seen such ambition.",
+    "zh": "小小座位，见识了大志向。"
+  },
+  {
+    "en": "The water meter is counting happy moments.",
+    "zh": "水表开始记录快乐时刻。"
+  },
+  {
+    "en": "That deserves a tasteful splash of pride.",
+    "zh": "这份骄傲，值得溅一点水花。"
+  },
+  {
+    "en": "The bathroom mirror sees a legend.",
+    "zh": "洗手间镜子里，站着个传奇。"
+  },
+  {
+    "en": "Even the loose screw is holding it together.",
+    "zh": "连松动的螺丝都稳住了。"
+  },
+  {
+    "en": "The soap insists it helped.",
+    "zh": "肥皂坚持说自己也有功。"
+  },
+  {
+    "en": "Your next opponent is the empty paper roll.",
+    "zh": "下一位对手：空纸筒。"
+  },
+  {
+    "en": "The maintenance log just added a smiley.",
+    "zh": "维修日志里多了个笑脸。"
+  },
+  {
+    "en": "One button stands between us and whoosh.",
+    "zh": "离一声哗啦，只差一个按钮。"
+  }
+]
+;
 LEVELS.forEach(l => FlushRules.validate(l));
 const $ = id => document.getElementById(id), KEY = 'flush-hour:campaign:v2', LEGACY_KEY = 'flush-hour:twin:testing:v1';
 const I18N = {
-en:{share:'Share',locked:'Locked',lockedHint:n=>`Clear room ${String(n).padStart(2,'0')} first`,nextUnlocked:n=>`Room ${String(n).padStart(2,'0')} is now unlocked.`,campaignComplete:'All 30 rooms cleared!',brand:'Flush Hour',sub:'A little strategy. A big relief.',guide:'Guide',tourLabel:'The bathroom tour',tourTitle:'30 rooms. One mission.',campaignNote:'Clear a room to unlock the next. Cleared rooms stay open for replay.',moves:'Moves',ready:'Ready to flush',highest:'Fullest toilet',floorLabel:'Tap a pipe · share the load',tooFull:'Too full',underLimit:'At or below the limit',footerTag:'SMALL PIPES. BIG BRAIN ENERGY.',easy:'Easy',medium:'Medium',hard:'Hard',master:'Master',levels:'Rooms',undo:'Undo',restart:'Restart',hint:'Hint',close:'Close',room:'Room',soundOn:'Turn sound on',soundOff:'Turn sound off',cleanNode:'✧ Fresh',equal:'These toilets are already equal. No move used.',click:'Tap any pipe to average the waste at its two ends.',mix:(a,b,v)=>`${a} + ${b}: both now ${v}%.`,mission:t=>`Get every toilet to <strong class="mission-limit">≤${t}%</strong> waste or less`,total:t=>`Total waste: ${t}%`,progress:(c,g)=>`${c}/${LEVELS.length} rooms cleared · ${g} perfect`,footer:'Waste percentages belong to individual toilets; they do not have to add up to 100%. Averaging keeps the total unchanged. Only the earned flush empties the bowls.',sessionOnly:'Progress is available in this session only; this browser has blocked local saving.',remaining:n=>`${n} ${n===1?'move':'moves'} left. Every toilet has to pass.`,noMoves:'Out of moves. Undo a move or restart to try a new route.',wonFeedback:'All toilets are at or below the limit. Your big flush is ready!',flushing:'The great flush…',flushed:'Ahhh. All fresh.',flushedNote:'Every bowl is now at 0%. Nicely handled.',next:'Next restroom',tour:'Choose another room',flush:'Flush them all',inspect:'Inspect the board first',victoryTitle:'Beautifully handled!',victoryText:t=>`Every toilet is at or below ${t}%. You’ve earned the most satisfying button in the room.`,movesUsed:'MOVES USED',maxWaste:'HIGHEST WASTE',perfect:'✦ Perfect flush · fewest possible moves',closeEnough:'Cleared! Try for a perfect flush on your next visit.',lossTitle:'A little backup.',lossText:n=>`You’ve used all ${n} moves, and at least one toilet is still too full. A different order can make all the difference.`,undoMove:'Undo the last move',tryAgain:'Try again',hintLabel:'A nudge, not a walkthrough',nextHint:'Another nudge',hideHint:'Hide hint',guideTitle:'Share. Balance. Flush.',guideIntro:'Same averaging idea. A very different kind of relief.',step1Title:'Tap anywhere along a pipe',step1:'The two connected toilets share their waste equally. For example, 80% and 20% become 50% and 50%. Equal endpoints cost no move.',step2Title:'Get every toilet at or below the limit',step2:'All toilets must pass at once, within the move limit. Exactly equal to the limit counts. A ready toilet can become too full again if you share with it.',step3Title:'Earn the big flush',step3:'Clear the room, press “Flush them all”, and watch every bowl swirl down to 0%. Clearing uses your move budget; the celebration flush is free.',step4Title:'Unlock the next restroom',step4:'Clear each room to unlock the next, even before you flush. All 30 puzzles require more minimum moves than the one before. Undo and restart are unlimited, and earned unlocks stay yours. Clear in the verified fewest moves for a perfect flush.',keyboard:'Keyboard: Tab between pipe controls; Enter or Space shares the waste. U undoes a move, R restarts, and H opens a hint. Sound is optional and starts off.',play:'Let’s roll',pickerTitle:'Pick a restroom.',pickerIntro:'Thirty rooms, one growing challenge. Clear each room to unlock the next; revisit cleared rooms whenever you like.',best:n=>`Best: ${n} moves`,budget:n=>`${n} moves`,goldTarget:n=>`Perfect: ${n}`,freshTitle:'Fresh from top to bottom!',freshAll:'You’ve flushed all 30 rooms. The entire building is sparkling.',freshSome:n=>`You’ve cleared all 30 rooms and flushed ${n} of them. Revisit any room for another satisfying flush.`,perfectCount:n=>`${n} of ${LEVELS.length} perfect flushes`,keepExploring:'Keep exploring',allDoneFeedback:'The entire tour is fresh. Revisit a room to improve your score.',reloadWon:'Your cleared board is restored. The flush is still waiting.',toilet:'Toilet',pipe:'Share between',atLimit:'above the limit',belowLimit:'at or below the limit'},
-zh:{share:'分享',locked:'未解锁',lockedHint:n=>`先通关第 ${String(n).padStart(2,'0')} 关`,nextUnlocked:n=>`第 ${String(n).padStart(2,'0')} 关已解锁。`,campaignComplete:'三十关，全部通关！',brand:'冲冲大作战',sub:'动一点脑筋，享一冲轻松。',guide:'指南',tourLabel:'洗手间巡游',tourTitle:'三十间厕所，一冲到底。',campaignNote:'通关一间，解锁下一间。已通关的关卡可以随时重玩。',moves:'已用步数',ready:'可以冲水',highest:'最高污物量',floorLabel:'点击水管 · 平均分配',tooFull:'还太满',underLimit:'不超过上限',footerTag:'小小水管，大大脑洞。',easy:'简单',medium:'中等',hard:'困难',master:'大师',levels:'选关',undo:'撤销',restart:'重来',hint:'提示',close:'关闭',room:'第',soundOn:'开启音效',soundOff:'关闭音效',cleanNode:'✧ 已清空',equal:'两端污物量已经相等，不消耗步数。',click:'点击任意水管，让两端马桶的污物量平均分配。',mix:(a,b,v)=>`${a} 与 ${b}：各为 ${v}%。`,mission:t=>`让每个马桶的污物量 <strong class="mission-limit">≤${t}%</strong>`,total:t=>`污物总量：${t}%`,progress:(c,g)=>`已通关 ${c}/${LEVELS.length} 关 · ${g} 次完美通关`,footer:'百分比表示每个马桶各自的污物量，加起来不必等于 100%。平均分配不会减少总量，只有通关后获得的冲水机会才能清空马桶。',sessionOnly:'浏览器限制了本地存储，本次进度只能在当前页面中保留。',remaining:n=>`还剩 ${n} 步，每一个马桶都要达标。`,noMoves:'步数用完了。撤销一步，或重新开始换个思路。',wonFeedback:'所有马桶的污物量都不超过上限，可以痛快地冲水了！',flushing:'哗啦啦，冲水中……',flushed:'啊，终于清爽了。',flushedNote:'所有马桶的污物量都已归零，干得漂亮！',next:'下一间洗手间',tour:'换一间试试',flush:'一键冲水',inspect:'先看看通关后的棋盘',victoryTitle:'干得漂亮！',victoryText:t=>`每个马桶的污物量都不超过 ${t}%。最令人期待的按钮，现在交给你。`,movesUsed:'通关步数',maxWaste:'最高污物量',perfect:'✦ 完美冲水 · 以最少步数通关',closeEnough:'通关成功！下次可以挑战最少步数。',lossTitle:'有点堵住了。',lossText:n=>`${n} 步已经用完，仍有马桶没有达标。换一种分配顺序，也许就能豁然开朗。`,undoMove:'撤销上一步',tryAgain:'再来一次',hintLabel:'给一点方向，不提供完整答案',nextHint:'再来一点提示',hideHint:'收起提示',guideTitle:'分一分，匀一匀，冲！',guideIntro:'熟悉的平均分配，不一样的畅快体验。',step1Title:'点击水管上的任意位置',step1:'水管两端的马桶会平均分配污物量。例如 80% 和 20% 会变成各 50%。两端已相等时，点击不消耗步数。',step2Title:'让所有马桶不超过上限',step2:'在步数上限内，让每个马桶同时达标。恰好等于上限也算通过。已经达标的马桶，再次分配后也可能变得太满。',step3Title:'赢得痛快的冲水时刻',step3:'通关后点击“一键冲水”，所有马桶都会出现旋涡，污物量随冲水降至 0%。通关需要计步，庆祝冲水不消耗步数。',step4Title:'逐关解锁下一间洗手间',step4:'每通关一间就立即解锁下一间，无需等到冲水结束。三十关所需的最少步数逐关增加。撤销和重来次数不限，已解锁的关卡不会重新上锁。以已验证的最少步数通关，即可获得“完美冲水”标记。',keyboard:'键盘：Tab 选择水管，Enter 或空格进行分配。U 撤销，R 重来，H 查看提示。音效默认关闭，可自行开启。',play:'开始挑战',pickerTitle:'挑一间洗手间。',pickerIntro:'三十间洗手间，难度逐关升级。通关后解锁下一间，也可以随时重玩已经通关的关卡。',best:n=>`最佳：${n} 步`,budget:n=>`上限 ${n} 步`,goldTarget:n=>`最优 ${n} 步`,freshTitle:'整栋楼都清爽了！',freshAll:'你已经冲洗了全部三十间洗手间。每一间都闪闪发亮！',freshSome:n=>`你已通关全部三十间洗手间，并冲洗了其中 ${n} 间。可以重玩任意关卡，再享一次畅快冲水。`,perfectCount:n=>`已获得 ${n}/${LEVELS.length} 个完美冲水标记`,keepExploring:'继续巡游',allDoneFeedback:'巡游全部完成！可以重玩任意关卡，挑战更少步数。',reloadWon:'已恢复通关棋盘，冲水按钮正等着你。',toilet:'马桶',pipe:'平均分配',atLimit:'超过上限',belowLimit:'不超过上限'}
+en:{share:'Share',locked:'Locked',lockedHint:n=>`Clear room ${String(n).padStart(2,'0')} first`,nextUnlocked:n=>`Room ${String(n).padStart(2,'0')} is now unlocked.`,campaignComplete:'All 30 rooms cleared!',brand:'Flush Hour',sub:'A little strategy. A big relief.',guide:'Guide',tourLabel:'The bathroom tour',tourTitle:'30 rooms. One mission.',campaignNote:'Clear a room to unlock the next. Cleared rooms stay open for replay.',moves:'Moves',ready:'Ready to flush',highest:'Fullest toilet',floorLabel:'Tap a pipe · share the load',tooFull:'Too full',underLimit:'At or below the limit',footerTag:'SMALL PIPES. BIG BRAIN ENERGY.',easy:'Easy',medium:'Medium',hard:'Hard',master:'Master',levels:'Rooms',undo:'Undo',restart:'Restart',hint:'Hint',close:'Close',room:'Room',soundOn:'Turn sound on',soundOff:'Turn sound off',cleanNode:'✧ Fresh',equal:'These toilets are already equal. No move used.',click:'Tap any pipe to average the waste at its two ends.',mix:(a,b,v)=>`${a} + ${b}: both now ${v}%.`,mission:t=>`Get every toilet to <strong class="mission-limit">≤${t}%</strong> waste or less`,total:t=>`Total waste: ${t}%`,progress:(c,g)=>`${c}/${LEVELS.length} rooms cleared · ${g} perfect`,footer:'Waste percentages belong to individual toilets; they do not have to add up to 100%. Averaging keeps the total unchanged. Only the earned flush empties the bowls.',sessionOnly:'Progress is available in this session only; this browser has blocked local saving.',remaining:n=>`${n} ${n===1?'move':'moves'} left. Every toilet has to pass.`,noMoves:'Out of moves. Undo a move or restart to try a new route.',wonFeedback:'All toilets are at or below the limit. Your big flush is ready!',flushing:'The great flush…',flushed:'Ahhh. All fresh.',flushedNote:'Every bowl is now at 0%. Nicely handled.',next:'Next restroom',tour:'Choose another room',flush:'Flush them all',inspect:'Inspect the board first',victoryTitle:'Beautifully handled!',movesUsed:'MOVES USED',maxWaste:'HIGHEST WASTE',perfect:'✦ Perfect flush · fewest possible moves',closeEnough:'Cleared! Try for a perfect flush on your next visit.',lossTitle:'A little backup.',lossText:n=>`You’ve used all ${n} moves, and at least one toilet is still too full. A different order can make all the difference.`,undoMove:'Undo the last move',tryAgain:'Try again',hintLabel:'A nudge, not a walkthrough',nextHint:'Another nudge',hideHint:'Hide hint',guideTitle:'Share. Balance. Flush.',guideIntro:'Same averaging idea. A very different kind of relief.',step1Title:'Tap anywhere along a pipe',step1:'The two connected toilets share their waste equally. For example, 80% and 20% become 50% and 50%. Equal endpoints cost no move.',step2Title:'Get every toilet at or below the limit',step2:'All toilets must pass at once, within the move limit. Exactly equal to the limit counts. A ready toilet can become too full again if you share with it.',step3Title:'Earn the big flush',step3:'Clear the room, press “Flush them all”, and watch every bowl swirl down to 0%. Clearing uses your move budget; the celebration flush is free.',step4Title:'Unlock the next restroom',step4:'Clear each room to unlock the next, even before you flush. All 30 puzzles require more minimum moves than the one before. Undo and restart are unlimited, and earned unlocks stay yours. Clear in the verified fewest moves for a perfect flush.',keyboard:'Keyboard: Tab between pipe controls; Enter or Space shares the waste. U undoes a move, R restarts, and H opens a hint. Sound is optional and starts off.',play:'Let’s roll',pickerTitle:'Pick a restroom.',pickerIntro:'Thirty rooms, one growing challenge. Clear each room to unlock the next; revisit cleared rooms whenever you like.',best:n=>`Best: ${n} moves`,budget:n=>`${n} moves`,goldTarget:n=>`Perfect: ${n}`,freshTitle:'Fresh from top to bottom!',freshAll:'You’ve flushed all 30 rooms. The entire building is sparkling.',freshSome:n=>`You’ve cleared all 30 rooms and flushed ${n} of them. Revisit any room for another satisfying flush.`,perfectCount:n=>`${n} of ${LEVELS.length} perfect flushes`,keepExploring:'Keep exploring',allDoneFeedback:'The entire tour is fresh. Revisit a room to improve your score.',reloadWon:'Your cleared board is restored. The flush is still waiting.',toilet:'Toilet',pipe:'Share between',atLimit:'above the limit',belowLimit:'at or below the limit'},
+zh:{share:'分享',locked:'未解锁',lockedHint:n=>`先通关第 ${String(n).padStart(2,'0')} 关`,nextUnlocked:n=>`第 ${String(n).padStart(2,'0')} 关已解锁。`,campaignComplete:'三十关，全部通关！',brand:'冲冲大作战',sub:'动一点脑筋，享一冲轻松。',guide:'指南',tourLabel:'洗手间巡游',tourTitle:'三十间厕所，一冲到底。',campaignNote:'通关一间，解锁下一间。已通关的关卡可以随时重玩。',moves:'已用步数',ready:'可以冲水',highest:'最高污物量',floorLabel:'点击水管 · 平均分配',tooFull:'还太满',underLimit:'不超过上限',footerTag:'小小水管，大大脑洞。',easy:'简单',medium:'中等',hard:'困难',master:'大师',levels:'选关',undo:'撤销',restart:'重来',hint:'提示',close:'关闭',room:'第',soundOn:'开启音效',soundOff:'关闭音效',cleanNode:'✧ 已清空',equal:'两端污物量已经相等，不消耗步数。',click:'点击任意水管，让两端马桶的污物量平均分配。',mix:(a,b,v)=>`${a} 与 ${b}：各为 ${v}%。`,mission:t=>`让每个马桶的污物量 <strong class="mission-limit">≤${t}%</strong>`,total:t=>`污物总量：${t}%`,progress:(c,g)=>`已通关 ${c}/${LEVELS.length} 关 · ${g} 次完美通关`,footer:'百分比表示每个马桶各自的污物量，加起来不必等于 100%。平均分配不会减少总量，只有通关后获得的冲水机会才能清空马桶。',sessionOnly:'浏览器限制了本地存储，本次进度只能在当前页面中保留。',remaining:n=>`还剩 ${n} 步，每一个马桶都要达标。`,noMoves:'步数用完了。撤销一步，或重新开始换个思路。',wonFeedback:'所有马桶的污物量都不超过上限，可以痛快地冲水了！',flushing:'哗啦啦，冲水中……',flushed:'啊，终于清爽了。',flushedNote:'所有马桶的污物量都已归零，干得漂亮！',next:'下一间洗手间',tour:'换一间试试',flush:'一键冲水',inspect:'先看看通关后的棋盘',victoryTitle:'干得漂亮！',movesUsed:'通关步数',maxWaste:'最高污物量',perfect:'✦ 完美冲水 · 以最少步数通关',closeEnough:'通关成功！下次可以挑战最少步数。',lossTitle:'有点堵住了。',lossText:n=>`${n} 步已经用完，仍有马桶没有达标。换一种分配顺序，也许就能豁然开朗。`,undoMove:'撤销上一步',tryAgain:'再来一次',hintLabel:'给一点方向，不提供完整答案',nextHint:'再来一点提示',hideHint:'收起提示',guideTitle:'分一分，匀一匀，冲！',guideIntro:'熟悉的平均分配，不一样的畅快体验。',step1Title:'点击水管上的任意位置',step1:'水管两端的马桶会平均分配污物量。例如 80% 和 20% 会变成各 50%。两端已相等时，点击不消耗步数。',step2Title:'让所有马桶不超过上限',step2:'在步数上限内，让每个马桶同时达标。恰好等于上限也算通过。已经达标的马桶，再次分配后也可能变得太满。',step3Title:'赢得痛快的冲水时刻',step3:'通关后点击“一键冲水”，所有马桶都会出现旋涡，污物量随冲水降至 0%。通关需要计步，庆祝冲水不消耗步数。',step4Title:'逐关解锁下一间洗手间',step4:'每通关一间就立即解锁下一间，无需等到冲水结束。三十关所需的最少步数逐关增加。撤销和重来次数不限，已解锁的关卡不会重新上锁。以已验证的最少步数通关，即可获得“完美冲水”标记。',keyboard:'键盘：Tab 选择水管，Enter 或空格进行分配。U 撤销，R 重来，H 查看提示。音效默认关闭，可自行开启。',play:'开始挑战',pickerTitle:'挑一间洗手间。',pickerIntro:'三十间洗手间，难度逐关升级。通关后解锁下一间，也可以随时重玩已经通关的关卡。',best:n=>`最佳：${n} 步`,budget:n=>`上限 ${n} 步`,goldTarget:n=>`最优 ${n} 步`,freshTitle:'整栋楼都清爽了！',freshAll:'你已经冲洗了全部三十间洗手间。每一间都闪闪发亮！',freshSome:n=>`你已通关全部三十间洗手间，并冲洗了其中 ${n} 间。可以重玩任意关卡，再享一次畅快冲水。`,perfectCount:n=>`已获得 ${n}/${LEVELS.length} 个完美冲水标记`,keepExploring:'继续巡游',allDoneFeedback:'巡游全部完成！可以重玩任意关卡，挑战更少步数。',reloadWon:'已恢复通关棋盘，冲水按钮正等着你。',toilet:'马桶',pipe:'平均分配',atLimit:'超过上限',belowLimit:'不超过上限'}
 };
-let language='en',sound=false,storageAvailable=true,records={},current=0,state=null,hintStep=0,feedbackOverride='',toastTimer=null,animationToken=0,audioCtx=null,modalKind='';
+let language='en',sound=false,storageAvailable=true,records={},current=0,state=null,hintStep=0,feedbackOverride='',toastTimer=null,animationToken=0,audioCtx=null,modalKind='',victoryQuipIndex=null,lastVictoryQuipIndex=-1;
 let saved=null;
 try {
   try { saved=JSON.parse(localStorage.getItem(KEY)||'null'); } catch(e) { saved=null; }
@@ -2909,7 +3148,7 @@ function validSavedSession(session){const level=LEVELS[current];return FlushCamp
 function loadLevel(index,restore=false){
   if(state?.phase==='flushing')return false;
   if(!isUnlocked(index)){if(Number.isInteger(index)&&index>0&&index<LEVELS.length)toast(t('lockedHint',index));return false;}
-  animationToken++;closeModal();current=index;const l=LEVELS[current];
+  animationToken++;closeModal();victoryQuipIndex=null;current=index;const l=LEVELS[current];
   state={values:l.initial.slice(),moves:0,history:[],phase:'playing'};hintStep=0;feedbackOverride='';
   if(restore&&validSavedSession(saved?.session)){const ss=saved.session;state={values:ss.values.slice(),moves:ss.moves,history:ss.history.map(a=>a.slice()),phase:ss.phase==='flushed'?'flushed':FlushRules.phase(ss.values,l.threshold,ss.moves,l.moveLimit)};}
   renderAll();persist();
@@ -2933,13 +3172,23 @@ function updateBoard(changed=[]){const l=LEVELS[current];l.nodes.forEach((n,i)=>
 function renderStatus(){const l=LEVELS[current],phase=state.phase;$('movesValue').innerHTML=`${state.moves} <small>/ ${l.moveLimit}</small>`;$('movesValue').classList.toggle('warning',phase==='playing'&&l.moveLimit-state.moves<=2);$('readyValue').innerHTML=`${FlushRules.readyCount(state.values,l.threshold)} <small>/ ${l.nodes.length}</small>`;$('highestValue').innerHTML=`${percent(Math.max(...state.values))}<small>%</small>`;$('totalWaste').textContent=t('total',FlushRules.percent(FlushRules.total(state.values)));$('undoBtn').disabled=!state.history.length||phase==='flushed'||phase==='flushing';$('restartBtn').disabled=phase==='flushing';$('hintBtn').disabled=phase==='flushing'||phase==='flushed';$('levelsBtn').disabled=phase==='flushing';$('languageBtn').disabled=phase==='flushing';$('guideBtn').disabled=phase==='flushing';$('shareBtn').disabled=phase==='flushing';document.querySelectorAll('[data-level]').forEach(e=>{e.disabled=phase==='flushing'||!isUnlocked(Number(e.dataset.level));e.setAttribute('aria-disabled',String(e.disabled));});let message=phase==='playing'?(feedbackOverride||(state.moves?t('remaining',l.moveLimit-state.moves):t('click'))):phase==='won'?t('wonFeedback'):phase==='failed'?t('noMoves'):phase==='flushing'?t('flushing'):t('flushedNote');announce(message);const b=$('completedBanner');b.hidden=!['won','flushed'].includes(phase);if(phase==='won')b.innerHTML=`<div><div class="completed-title">${t('victoryTitle')}</div><div class="completed-note">${t(current<LEVELS.length-1?'nextUnlocked':'campaignComplete',current+2)}</div></div><button class="btn yellow" data-action="flush">${icon('flush')}${t('flush')}</button>`;else if(phase==='flushed')b.innerHTML=`<div><div class="completed-title">${t('flushed')}</div><div class="completed-note">${counts().c===LEVELS.length?t('allDoneFeedback'):t('flushedNote')}</div></div><button class="btn primary" data-action="next">${t(current<LEVELS.length-1?'next':'tour')}${icon('arrow')}</button>`;renderHint();}
 function renderAll(){renderLanguage();renderCampaign();renderHeading();renderBoard();renderStatus();}
 function move(edgeIndex){if(state.phase!=='playing'||!LEVELS[current].edges[edgeIndex])return;const l=LEVELS[current],edge=l.edges[edgeIndex],result=FlushRules.average(state.values,edge);if(!result.changed){toast(t('equal'));return;}state.history.push(state.values.slice());state.values=result.values;state.moves++;state.phase=FlushRules.phase(state.values,l.threshold,state.moves,l.moveLimit);feedbackOverride=t('mix',l.nodes[edge[0]].id,l.nodes[edge[1]].id,percent(state.values[edge[0]]));updateBoard(edge);renderStatus();const active=document.querySelector(`[data-edge="${edgeIndex}"]`);active?.classList.add('just-used');setTimeout(()=>active?.classList.remove('just-used'),420);playSound('tap');if(state.phase==='won'){recordClear();renderCampaign();openVictory();}else if(state.phase==='failed')openFailure();persist();}
-function undo(){if(!state.history.length||['flushing','flushed'].includes(state.phase))return;closeModal();state.values=state.history.pop();state.moves--;state.phase='playing';feedbackOverride='';updateBoard();renderStatus();persist();}
+function undo(){if(!state.history.length||['flushing','flushed'].includes(state.phase))return;closeModal();victoryQuipIndex=null;state.values=state.history.pop();state.moves--;state.phase='playing';feedbackOverride='';updateBoard();renderStatus();persist();}
 function restart(){if(state.phase==='flushing')return;loadLevel(current);}
 function renderHint(){const e=$('hintPanel');e.hidden=!hintStep;if(hintStep){const hints=LEVELS[current].hints[language]||LEVELS[current].hints.en;e.innerHTML=`<div class="hint-heading">${t('hintLabel')}</div><p>${escape(hints.slice(0,hintStep).join(' '))}</p><button class="hint-more" data-action="${hintStep<hints.length?'moreHint':'hideHint'}">${t(hintStep<hints.length?'nextHint':'hideHint')}</button>`;}}
 function closeModal(){if($('modal').open)$('modal').close();modalKind='';}
 function showModal(kind,html){modalKind=kind;$('modalContent').innerHTML=html;if(!$('modal').open)$('modal').showModal();}
 function closeButton(){return `<button type="button" class="dialog-close" data-action="close" aria-label="${t('close')}">×</button>`;}
-function openVictory(){const l=LEVELS[current];showModal('victory',`<div class="dialog-body celebration">${closeButton()}<div class="dialog-art">${toiletSvg('dialog-win',0,l.threshold,'drained')}</div><div class="dialog-eyebrow">${t('room')} ${String(current+1).padStart(2,'0')} · ${ltext(l.name)}</div><h2 class="dialog-title" id="modalTitle">${t('victoryTitle')}</h2><p class="dialog-text">${t('victoryText',l.threshold)}</p><p class="unlock-notice">${t(current<LEVELS.length-1?'nextUnlocked':'campaignComplete',current+2)}</p>${state.moves<=l.optimalMoves?`<div class="achievement-chip">${t('perfect')}</div>`:''}<div class="dialog-stats"><div class="dialog-stat"><strong>${state.moves} / ${l.moveLimit}</strong><span>${t('movesUsed')}</span></div><div class="dialog-stat"><strong>${percent(Math.max(...state.values))}%</strong><span>${t('maxWaste')}</span></div></div><button type="button" class="btn yellow dialog-primary" data-action="flush">${icon('flush')}${t('flush')}</button><button type="button" class="dialog-secondary" data-action="close">${t('inspect')}</button></div>`);playSound('win');}
+// Keep one quip for the earned clear, including inspection and language changes.
+function victoryQuipText(){
+  if(victoryQuipIndex===null){
+    const choices=VICTORY_QUIPS.length-(lastVictoryQuipIndex>=0?1:0);
+    let next=Math.floor(Math.random()*choices);
+    if(lastVictoryQuipIndex>=0&&next>=lastVictoryQuipIndex)next++;
+    victoryQuipIndex=next;lastVictoryQuipIndex=next;
+  }
+  return ltext(VICTORY_QUIPS[victoryQuipIndex]);
+}
+function openVictory(){const l=LEVELS[current];showModal('victory',`<div class="dialog-body celebration victory-dialog">${closeButton()}<div class="victory-content" tabindex="0" role="region" aria-labelledby="modalTitle"><div class="dialog-art">${toiletSvg('dialog-win',0,l.threshold,'drained')}</div><div class="dialog-eyebrow">${t('room')} ${String(current+1).padStart(2,'0')} · ${ltext(l.name)}</div><h2 class="dialog-title" id="modalTitle">${t('victoryTitle')}</h2><p class="dialog-text victory-quip">${escape(victoryQuipText())}</p><p class="unlock-notice">${t(current<LEVELS.length-1?'nextUnlocked':'campaignComplete',current+2)}</p>${state.moves<=l.optimalMoves?`<div class="achievement-chip">${t('perfect')}</div>`:''}<div class="dialog-stats"><div class="dialog-stat"><strong>${state.moves} / ${l.moveLimit}</strong><span>${t('movesUsed')}</span></div><div class="dialog-stat"><strong>${percent(Math.max(...state.values))}%</strong><span>${t('maxWaste')}</span></div></div></div><div class="victory-actions"><button type="button" class="btn yellow dialog-primary" data-action="flush">${icon('flush')}${t('flush')}</button><button type="button" class="dialog-secondary" data-action="close">${t('inspect')}</button></div></div>`);playSound('win');}
 function openFailure(){const l=LEVELS[current];showModal('failure',`<div class="dialog-body">${closeButton()}<div class="dialog-eyebrow">${t('room')} ${current+1}</div><h2 class="dialog-title" id="modalTitle">${t('lossTitle')}</h2><p class="dialog-text">${t('lossText',l.moveLimit)}</p><div style="display:grid;gap:10px;margin-top:23px"><button class="btn primary dialog-primary" data-action="undo">${icon('undo')}${t('undoMove')}</button><button class="btn dialog-primary" data-action="restart">${icon('restart')}${t('tryAgain')}</button></div></div>`);}
 function openGuide(){showModal('guide',`<div class="dialog-body">${closeButton()}<div class="dialog-eyebrow">${t('guide')}</div><h2 class="dialog-title" id="modalTitle">${t('guideTitle')}</h2><p class="dialog-text">${t('guideIntro')}</p>${[1,2,3,4].map(i=>`<div class="guide-step"><div class="step-number">0${i}</div><div><h3>${t('step'+i+'Title')}</h3><p>${t('step'+i)}</p></div></div>`).join('')}<p class="guide-fine">${t('keyboard')}</p><button class="btn primary dialog-primary" style="margin-top:19px" data-action="close">${t('play')}</button></div>`);}
 function openPicker(){showModal('picker',`<div class="dialog-body">${closeButton()}<div class="dialog-eyebrow">${t('tourLabel')}</div><h2 class="dialog-title" id="modalTitle">${t('pickerTitle')}</h2><p class="picker-note">${t('pickerIntro')}</p><div class="picker-list">${levelButtons()}</div></div>`);}
