@@ -55,14 +55,14 @@ class Node {
   addEventListener(type,fn){(this.listeners[type]??=[]).push(fn);}
   dispatch(type,extra={}){const event={type,target:this,preventDefault(){this.defaultPrevented=true;},stopPropagation(){this.propagationStopped=true;},...extra};for(let n=this;n;n=n.parentNode){for(const fn of n.listeners[type]||[])fn(event);if(event.propagationStopped)return event;}for(const fn of this.doc.listeners[type]||[])fn(event);return event;}
   click(){if(!this.disabled)this.dispatch('click');}
-  focus(){this.doc.activeElement=this;}
+  focus(options={}){this.doc.activeElement=this;this.doc.viewEvents.push({type:'focus',id:this.id,preventScroll:options.preventScroll===true});}
   scrollIntoView(){}
   showModal(){this.open=true;}
   close(){this.open=false;for(const fn of this.listeners.close||[])fn({target:this});}
   getBoundingClientRect(){return {left:0,right:520,top:0,bottom:600,width:520,height:600};}
 }
 class Document {
-  constructor(){this.ids=new Map();this.listeners={};this.documentElement=new Node('html',this);this.head=this.documentElement.appendChild(new Node('head',this));this.body=this.documentElement.appendChild(new Node('body',this));this.title='';}
+  constructor(){this.ids=new Map();this.listeners={};this.viewEvents=[];this.documentElement=new Node('html',this);this.head=this.documentElement.appendChild(new Node('head',this));this.body=this.documentElement.appendChild(new Node('body',this));this.title='';}
   getElementById(id){return this.ids.get(id)||null;}
   createElement(tag){return new Node(tag,this);}
   querySelectorAll(s){return this.documentElement.querySelectorAll(s);}
@@ -76,6 +76,8 @@ function makeApp(storage=new Map(), options={}) {
   const levelData=document.body.appendChild(document.createElement('script'));levelData.id='level-data';levelData.textContent=options.levels?JSON.stringify(options.levels):embeddedLevelData;
   let clock=0,nextTimer=1;const timers=new Map(),frames=[];
   const sandbox={document,window:{},console,URL,URLSearchParams,Blob,TextEncoder,navigator:{},location:new URL(options.url||'https://junglyhh.github.io/flush_hour/'),ResizeObserver:class{observe(){}},matchMedia:()=>({matches:options.reducedMotion===true,addEventListener(){}}),performance:{now:()=>clock},localStorage:{getItem:key=>storage.get(key)??null,setItem:(key,value)=>{if(options.blockStorage)throw Error('Storage blocked');storage.set(key,value);}},setTimeout(fn,delay){const id=nextTimer++;timers.set(id,{at:clock+(delay||0),fn});return id;},clearTimeout(id){timers.delete(id);},requestAnimationFrame(fn){frames.push(fn);return frames.length;}};
+  sandbox.scrollX=0;sandbox.scrollY=0;
+  sandbox.scrollTo=(first,second)=>{const target=typeof first==='object'?first:{left:first,top:second};sandbox.scrollX=target.left??sandbox.scrollX;sandbox.scrollY=target.top??sandbox.scrollY;document.viewEvents.push({type:'scroll',left:sandbox.scrollX,top:sandbox.scrollY,behavior:target.behavior});};
   sandbox.window=sandbox;
   let script=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)].filter(match=>!match[1].includes('application/json')).map(match=>match[2]).join('\n');
   const exportCode=`globalThis.FHQA={move,undo,restart,flush,loadLevel,closeModal,openVictory,openFailure,openGuide,openPicker,validSavedSession,isUnlocked,unlockedThrough,counts,sharing:FlushSharing,getSnapshot:()=>JSON.parse(JSON.stringify({current,state,records,language,sound,storageAvailable,modalKind,hintStep}))};\nloadLevel(current,true);`;
@@ -86,7 +88,7 @@ function makeApp(storage=new Map(), options={}) {
   function tick(now){clock=now;for(const frame of frames.splice(0))frame(clock);for(const[id,timer]of [...timers])if(timer.at<=clock){timers.delete(id);timer.fn();}}
   function snap(){return copy(api.getSnapshot());}
   function click(selector){const target=document.querySelector(selector);check(target,`click target ${selector}`);target.click();}
-  return {api,document,storage,tick,snap,click,get now(){return clock;},pendingFrames:()=>frames.length};
+  return {api,document,storage,tick,snap,click,get now(){return clock;},pendingFrames:()=>frames.length,viewEvents:document.viewEvents,scrollPosition:()=>({left:sandbox.scrollX,top:sandbox.scrollY}),setScrollPosition(top,left=0){sandbox.scrollY=top;sandbox.scrollX=left;}};
 }
 
 
@@ -187,6 +189,35 @@ eq(earnedReload.api.unlockedThrough(),1,'earned access survives refresh after un
 eq(earnedReload.api.loadLevel(2),false,'a clear unlocks only the next unearned room');
 eq(earnedReload.api.loadLevel(1),true,'earned access remains usable after refresh');
 
+// The completed-board Next control must reach the absolute page top after
+// the newly loaded heading has received focus. Per-toilet status remains
+// accessible even though the visible status captions have been removed.
+const nextFlow=makeApp(new Map(),{levels:pairLevels});
+eq(nextFlow.document.querySelectorAll('.waste-state').length,0,'toilets do not render separate visible status captions');
+check(nextFlow.document.getElementById('toilet-0').getAttribute('aria-label').includes('above the limit'),'unsafe toilet retains its accessible English status');
+check(nextFlow.document.getElementById('toilet-1').getAttribute('aria-label').includes('at or below the limit'),'ready toilet retains its accessible English status');
+nextFlow.click('#languageBtn');
+check(nextFlow.document.getElementById('toilet-0').getAttribute('aria-label').includes('超过上限'),'unsafe toilet retains its accessible Chinese status');
+check(nextFlow.document.getElementById('toilet-1').getAttribute('aria-label').includes('不超过上限'),'ready toilet retains its accessible Chinese status');
+nextFlow.click('#languageBtn');nextFlow.api.move(0);
+check(nextFlow.document.getElementById('toilet-0').classList.contains('ready'),'cleared percentage badge has the ready state');
+check(nextFlow.document.getElementById('toilet-0').getAttribute('aria-label').includes('at or below the limit'),'averaging updates the accessible status');
+nextFlow.api.flush();nextFlow.tick(5000);
+check(nextFlow.document.getElementById('toilet-0').getAttribute('aria-label').includes('0%'),'flushed toilet announces zero waste');
+check(nextFlow.document.getElementById('toilet-0').getAttribute('aria-label').includes('Fresh'),'flushed toilet retains its accessible completion status');
+nextFlow.setScrollPosition(900);
+const nextEventsStart=nextFlow.viewEvents.length;
+nextFlow.click('[data-action="next"]');nextFlow.tick(nextFlow.now+16);
+eq(nextFlow.snap().current,1,'actual Next control advances to the unlocked room');
+eq(nextFlow.snap().state.values,pairLevels[1].initial,'Next loads the next initial board');
+eq(nextFlow.scrollPosition().top,0,'Next reaches the absolute page top');
+eq(nextFlow.document.activeElement.id,'levelTitle','Next gives keyboard focus to the new room heading');
+const nextEvents=nextFlow.viewEvents.slice(nextEventsStart);
+const lastScroll=nextEvents.findLastIndex(event=>event.type==='scroll');
+check(lastScroll>=0,'Next explicitly scrolls the page after advancing');
+check(nextEvents.slice(lastScroll+1).every(event=>event.type!=='focus'||event.preventScroll),'later focus cannot undo the top-of-page scroll');
+eq(nextFlow.document.querySelectorAll('.waste-state').length,0,'changing rooms does not recreate status captions');
+
 // Production moves, win dialog, inspection, numerical drain and saving for all
 // thirty certified solutions. Navigation proceeds through earned unlocks.
 const allApp=makeApp();
@@ -259,6 +290,13 @@ eq(copy(allApp.api.counts()),{c:30,f:30,g:30},'complete campaign reports thirty 
 assertAccess(allApp,29);
 allApp.tick(allApp.now+600);
 eq(allApp.snap().modalKind,'tour','final flush celebrates the full campaign');
+allApp.api.closeModal();allApp.setScrollPosition(600);
+const lastRoomEvents=allApp.viewEvents.length;
+allApp.click('[data-action="next"]');
+eq(allApp.snap().current,29,'last-room control does not advance past the campaign');
+eq(allApp.snap().modalKind,'picker','last-room control still opens the room picker');
+eq(allApp.viewEvents.slice(lastRoomEvents).filter(event=>event.type==='scroll').length,0,'opening the final room picker does not trigger the next-room page scroll');
+allApp.api.closeModal();
 
 // At the move cap, an equal pair is free. A tiny but positive excess still
 // fails, and the failure remains undoable before and after refresh.
@@ -584,6 +622,8 @@ const report={
     'all thirty ID-matched solutions win and persist',
     'fresh sidebar, picker, direct load and URL lock enforcement',
     'true clear unlocks before flush',
+    'completed-board Next reaches absolute page top after heading focus',
+    'visible toilet status captions removed while accessible status remains',
     'undo, restart and refresh preserve earned unlocks',
     'language changes preserve puzzle and progression',
     'win dialog, inspect, interrupted flush and exact-zero completion',

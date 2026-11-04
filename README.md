@@ -26,6 +26,8 @@ Percentages describe each toilet’s own fill level; their combined total need n
 ### Controls and progress
 
 - **Undo**, **Restart**, and conceptual hints are available. No full solution appears inside the game.
+- Each waste percentage has a translucent **orange background above the limit** or **green background at or below it**, without a separate status caption. Accessible labels retain the exact status.
+- After flushing, **Next restroom** opens the next level and scrolls the page to the very top.
 - The compact header has **language**, **sound**, **guide**, and **share** controls, in that order. Language switching keeps the current board intact.
 - Keyboard: **Tab** selects a pipe; **Enter** or **Space** activates it. **U** undoes, **R** restarts, and **H** toggles the hint. Gameplay shortcuts pause while a dialog is open.
 - Sound starts off. Flushing respects reduced-motion preferences.
@@ -89,6 +91,8 @@ Every threshold uses **≤**: equality counts. The minimum effective move count 
 ### 操作、存档与分享
 
 - 提供撤销、重开和思路提示；游戏内不显示完整解法。以最少步数通关可获得“完美冲水”标记。
+- 马桶百分比采用半透明底色：超过上限为橙色，低于或等于上限为绿色，不再另列状态文字；辅助阅读标签仍保留状态说明。
+- 冲水后点击“下一间洗手间”，进入下一关并自动回到页面最顶部。
 - 顶部依次为缩小后的 **语言、音效、指南** 按钮，以及新增的 **分享** 按钮。切换语言不会重置棋盘。
 - 分享菜单支持 **微信、Facebook、X / Twitter、WhatsApp、Telegram、LinkedIn**、设备支持的系统分享，以及复制游戏链接。微信选项显示内嵌二维码和操作说明；也可在微信内打开游戏后使用微信的分享菜单。
 - 键盘：**Tab** 选择水管，**Enter / 空格** 分配，**U** 撤销，**R** 重开，**H** 查看提示。弹窗打开时暂停游戏快捷键。
