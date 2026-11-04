@@ -1,6 +1,6 @@
 [
   {
-    "id": "flush-01",
+    "id": "campaign-01",
     "name": {
       "en": "A Fresh Start",
       "zh": "冲个好头"
@@ -48,15 +48,73 @@
     }
   },
   {
-    "id": "flush-02",
+    "id": "campaign-02",
+    "name": {
+      "en": "Occupied!",
+      "zh": "有人啦！"
+    },
+    "difficulty": "easy",
+    "tagline": {
+      "en": "Two busy cubicles, one helpful neighbor.",
+      "zh": "两间满满当当，中间来帮忙。"
+    },
+    "shape": "path3",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "initial": [
+      80,
+      0,
+      60
+    ],
+    "threshold": 50,
+    "moveLimit": 4,
+    "optimalMoves": 2,
+    "hints": {
+      "en": [
+        "The low center can help both of its neighbors.",
+        "A level exactly on the limit is safe too."
+      ],
+      "zh": [
+        "中间的低水位能依次帮助两侧。",
+        "水位刚好等于上限，也算达标。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-03",
     "name": {
       "en": "Mind the Queue",
       "zh": "排队别急"
     },
     "difficulty": "easy",
     "tagline": {
-      "en": "The last cubicle has room. Pass it on.",
-      "zh": "最后一间还有余量，把负担传过去。"
+      "en": "Make room down the line, then circle back.",
+      "zh": "先给后面腾位置，再回头照顾前面。"
     },
     "shape": "path3",
     "nodes": [
@@ -96,25 +154,25 @@
     "optimalMoves": 3,
     "hints": {
       "en": [
-        "The far toilet has space to help.",
-        "A toilet that is already safe may still need to share again."
+        "The far empty bowl helps only after waste reaches the middle.",
+        "Revisit the first pipe after making room farther along."
       ],
       "zh": [
-        "远端的马桶还有空间可以帮忙。",
-        "已经达标的马桶，可能还需要再分担一次。"
+        "污水先到中间，最远的空马桶才能帮忙。",
+        "后面腾出空间后，记得回到前面的水管。"
       ]
     }
   },
   {
-    "id": "flush-03",
+    "id": "campaign-04",
     "name": {
       "en": "Three’s a Crowd",
       "zh": "三位请让让"
     },
     "difficulty": "easy",
     "tagline": {
-      "en": "A crowded little triangle. Keep your cool.",
-      "zh": "三角小隔间有点挤，冷静分配就好。"
+      "en": "A tiny triangle with two very full bowls.",
+      "zh": "小小三角间，两位快满啦。"
     },
     "shape": "triangle",
     "nodes": [
@@ -158,25 +216,25 @@
     "optimalMoves": 4,
     "hints": {
       "en": [
-        "The emptiest bowl gives you room to work.",
-        "A toilet at exactly the limit is ready. Check the others before sharing again."
+        "One empty bowl must absorb pressure from both full ones.",
+        "After a mix, compare all three pipes before choosing again."
       ],
       "zh": [
-        "先利用最空的马桶腾出周转空间。",
-        "恰好等于上限的马桶也已达标，再次分担前先看看其他马桶。"
+        "一个空马桶要分担两边的压力。",
+        "混合之后，重新比较三条水管再决定。"
       ]
     }
   },
   {
-    "id": "flush-04",
+    "id": "campaign-05",
     "name": {
       "en": "Porcelain Junction",
       "zh": "瓷器岔路口"
     },
-    "difficulty": "medium",
+    "difficulty": "easy",
     "tagline": {
-      "en": "All traffic goes through the middle.",
-      "zh": "所有负担，都要经过中间这一站。"
+      "en": "The center is everybody’s favorite shortcut.",
+      "zh": "大家都要借道这只中转马桶。"
     },
     "shape": "star",
     "nodes": [
@@ -222,29 +280,29 @@
       10
     ],
     "threshold": 44,
-    "moveLimit": 8,
+    "moveLimit": 7,
     "optimalMoves": 5,
     "hints": {
       "en": [
-        "The center is a transfer station. Keep some room there.",
-        "Exactly 44% counts as ready. Keep every other toilet at or below its limit too."
+        "The center carries spare room between the outer bowls.",
+        "A low outer bowl can refresh the center for another visit."
       ],
       "zh": [
-        "中间是周转站，要给它留一点空间。",
-        "恰好 44% 也达标，其他马桶也要同时不超过上限。"
+        "中心马桶负责把余量送往各个分支。",
+        "低水位的外围马桶能让中心再次帮忙。"
       ]
     }
   },
   {
-    "id": "flush-05",
+    "id": "campaign-06",
     "name": {
-      "en": "Round the U-Bend",
-      "zh": "回旋U形弯"
+      "en": "Around the U-Bend",
+      "zh": "U形弯兜一圈"
     },
     "difficulty": "medium",
     "tagline": {
-      "en": "There is more than one way around this mess.",
-      "zh": "绕一圈，或许就有新的解法。"
+      "en": "There are two ways around this porcelain ring.",
+      "zh": "沿着瓷器环，左右都能绕。"
     },
     "shape": "cycle5",
     "nodes": [
@@ -297,36 +355,114 @@
       ]
     ],
     "initial": [
-      35,
-      35,
+      90,
+      50,
+      55,
       0,
-      5,
-      95
+      45
     ],
-    "threshold": 35,
-    "moveLimit": 10,
-    "optimalMoves": 5,
+    "threshold": 49,
+    "moveLimit": 8,
+    "optimalMoves": 6,
     "hints": {
       "en": [
-        "The loop gives you two routes out of a busy corner.",
-        "Toilets starting at the limit are ready already, but can become too full if you share again."
+        "The empty bowl can receive waste from either direction.",
+        "Keep a route back to the hottest bowl after the first few mixes."
       ],
       "zh": [
-        "环形管道提供了两条疏散路线。",
-        "一开始恰好等于上限的马桶已经达标，但再次分担后也可能变得太满。"
+        "空马桶可以从两个方向接收污水。",
+        "前几次混合后，还要给最满的马桶留出回路。"
       ]
     }
   },
   {
-    "id": "flush-06",
+    "id": "campaign-07",
+    "name": {
+      "en": "The Spare Cubicle",
+      "zh": "备用厕位"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "A quiet branch can rescue a crowded junction.",
+      "zh": "安静的小分支，也能救忙碌的路口。"
+    },
+    "shape": "fork",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      95,
+      40,
+      40,
+      50,
+      75
+    ],
+    "threshold": 62,
+    "moveLimit": 9,
+    "optimalMoves": 7,
+    "hints": {
+      "en": [
+        "The two outer high bowls need help through the junction.",
+        "Refresh the lower branch before asking it to carry more."
+      ],
+      "zh": [
+        "两端较满的马桶都要借助路口。",
+        "让低水位分支恢复余量，再继续分担。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-08",
     "name": {
       "en": "Diamond Detour",
       "zh": "菱形绕行"
     },
     "difficulty": "medium",
     "tagline": {
-      "en": "A fancy floor plan with a very useful back room.",
-      "zh": "布局很讲究，后排那一间尤其有用。"
+      "en": "Choose which side gets the cool bowl first.",
+      "zh": "凉快的余量，先从哪一侧借？"
     },
     "shape": "kite",
     "nodes": [
@@ -386,29 +522,115 @@
       5
     ],
     "threshold": 60,
-    "moveLimit": 11,
+    "moveLimit": 10,
     "optimalMoves": 8,
     "hints": {
       "en": [
-        "The toilet at the end of the tail has room to spare.",
-        "Two crowded toilets cannot make each other safe on their own."
+        "Both sides of the diamond meet at the same bottleneck.",
+        "The low tail bowl is useful only when its neighbor can pass that room along."
       ],
       "zh": [
-        "尾端的马桶还有不少余量。",
-        "两个都太满的马桶，无法只靠互相分担就同时达标。"
+        "菱形的两侧都通向同一个瓶颈。",
+        "尾端的低水位，要靠邻居继续传递才有用。"
       ]
     }
   },
   {
-    "id": "flush-07",
+    "id": "campaign-09",
+    "name": {
+      "en": "Bow-Tie Plumbing",
+      "zh": "蝴蝶结水管"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "Two loops share one very busy middle.",
+      "zh": "上下两个环，共用一个忙碌的结。"
+    },
+    "shape": "bowtie",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        2
+      ]
+    ],
+    "initial": [
+      5,
+      40,
+      70,
+      80,
+      85
+    ],
+    "threshold": 57,
+    "moveLimit": 11,
+    "optimalMoves": 9,
+    "hints": {
+      "en": [
+        "The shared middle is the only bridge between the loops.",
+        "Make room in the cooler loop before drawing waste from the hotter one."
+      ],
+      "zh": [
+        "共用的中心是两个环之间唯一的桥。",
+        "先在较空的一环腾位置，再分担较满的一环。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-10",
     "name": {
       "en": "Double Trouble",
       "zh": "两翼告急"
     },
-    "difficulty": "hard",
+    "difficulty": "medium",
     "tagline": {
-      "en": "Two wings. One bridge. No time for a blockage.",
-      "zh": "两侧隔间，一座桥梁，可别卡在中间。"
+      "en": "Two restroom wings must help each other out.",
+      "zh": "左右两翼，都得互相搭把手。"
     },
     "shape": "double_t",
     "nodes": [
@@ -474,29 +696,121 @@
       75
     ],
     "threshold": 56,
-    "moveLimit": 13,
+    "moveLimit": 12,
     "optimalMoves": 10,
     "hints": {
       "en": [
-        "The middle pipe lets one wing borrow space from the other.",
-        "An end toilet can help the opposite wing through the central junctions."
+        "The center pipe is the only link between the two wings.",
+        "A low end bowl can prepare its wing before the bridge is used."
       ],
       "zh": [
-        "中间的连接让两侧可以互相借用空间。",
-        "末端的马桶也能通过中间节点，帮助另一侧分担。"
+        "中间水管是左右两翼唯一的连接。",
+        "先用低水位端点准备好余量，再跨桥调度。"
       ]
     }
   },
   {
-    "id": "flush-08",
+    "id": "campaign-11",
+    "name": {
+      "en": "Restroom Roundabout",
+      "zh": "卫生间环岛"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "Six stalls, two cool spots, one careful circuit.",
+      "zh": "六个厕位、两处低水位，绕环要有章法。"
+    },
+    "shape": "cycle6",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "F",
+        "x": 0,
+        "y": 0.5
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "initial": [
+      10,
+      45,
+      80,
+      10,
+      90,
+      70
+    ],
+    "threshold": 51,
+    "moveLimit": 13,
+    "optimalMoves": 11,
+    "hints": {
+      "en": [
+        "The two low bowls can absorb waste from different sides.",
+        "A nearly safe neighbor can become overloaded again; check both ends of a pipe."
+      ],
+      "zh": [
+        "两个低水位马桶可以分别分担两侧。",
+        "刚达标的邻居也可能再次超标，选水管时看两端。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-12",
     "name": {
       "en": "Bull in a Bathroom",
       "zh": "牛气洗手间"
     },
-    "difficulty": "hard",
+    "difficulty": "medium",
     "tagline": {
-      "en": "Two stubborn horns and a triangle to tame them.",
-      "zh": "两只倔强的角，要靠三角核心来调节。"
+      "en": "The little triangle has two demanding horns.",
+      "zh": "小三角忙不停，两只犄角都要管。"
     },
     "shape": "bull",
     "nodes": [
@@ -556,29 +870,97 @@
       25
     ],
     "threshold": 50,
-    "moveLimit": 15,
+    "moveLimit": 14,
     "optimalMoves": 12,
     "hints": {
       "en": [
-        "Each horn has only one pipe. Prepare its neighbor before sharing.",
-        "The triangle can shift spare capacity between the horns."
+        "The outer bowls depend on their single connecting pipes.",
+        "The triangle can trade spare room before serving an outer bowl again."
       ],
       "zh": [
-        "每只角都只有一条管道，先让它的邻居腾出余量。",
-        "三角核心可以把可用空间在两只角之间转移。"
+        "外围马桶只能通过各自的一条水管获得帮助。",
+        "再次照顾外围之前，可以先在三角形里交换余量。"
       ]
     }
   },
   {
-    "id": "flush-09",
+    "id": "campaign-13",
+    "name": {
+      "en": "Cistern Switchboard",
+      "zh": "水箱调度台"
+    },
+    "difficulty": "medium",
+    "tagline": {
+      "en": "A tiny safety margin calls for delicate routing.",
+      "zh": "余量只剩一点点，调度要更精细。"
+    },
+    "shape": "star",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "D",
+        "x": 0.5,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "initial": [
+      0,
+      90,
+      85,
+      20
+    ],
+    "threshold": 48.8,
+    "moveLimit": 15,
+    "optimalMoves": 13,
+    "hints": {
+      "en": [
+        "The center needs repeated visits to help both high branches.",
+        "The average is 48.75%; the 48.8% limit leaves very little unevenness."
+      ],
+      "zh": [
+        "中心要反复中转，才能照顾两条高水位分支。",
+        "平均水位是48.75%，48.8%的上限几乎不容失衡。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-14",
     "name": {
       "en": "The Long Queue",
       "zh": "长廊大排队"
     },
-    "difficulty": "master",
+    "difficulty": "medium",
     "tagline": {
-      "en": "A long corridor. A short allowance. Every move counts.",
-      "zh": "走廊很长，步数很紧，每一步都要算好。"
+      "en": "A full bowl in the middle holds up the queue.",
+      "zh": "中途一只满马桶，堵住了整条长廊。"
     },
     "shape": "path5",
     "nodes": [
@@ -634,29 +1016,111 @@
       15
     ],
     "threshold": 48,
-    "moveLimit": 14,
+    "moveLimit": 16,
     "optimalMoves": 14,
     "hints": {
       "en": [
-        "Spare capacity must travel through the corridor one connection at a time.",
-        "Repeatedly mixing one pair cannot move the load far enough."
+        "The second bowl starts fullest, so the nearest pipe is not automatically best.",
+        "Spare room at the far end must travel back through the queue."
       ],
       "zh": [
-        "可用空间必须沿着走廊，一条连接一条连接地传递。",
-        "一直重复同一对马桶，无法让负担走得足够远。"
+        "第二只马桶最满，最近的水管未必最合适。",
+        "远端的余量需要沿着队伍传回来。"
       ]
     }
   },
   {
-    "id": "flush-10",
+    "id": "campaign-15",
     "name": {
-      "en": "Royal Flush",
-      "zh": "皇家大冲关"
+      "en": "Horns of a Dilemma",
+      "zh": "两头犯难"
     },
-    "difficulty": "master",
+    "difficulty": "medium",
     "tagline": {
-      "en": "The grand finale. Leave every throne ready to flush.",
-      "zh": "压轴大考，让每一座宝座都准备好冲水。"
+      "en": "One horn has room; the other needs it badly.",
+      "zh": "一头还有余量，另一头急需帮助。"
+    },
+    "shape": "bull",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0.5,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 0
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "initial": [
+      48,
+      65,
+      60,
+      15,
+      80
+    ],
+    "threshold": 54,
+    "moveLimit": 17,
+    "optimalMoves": 15,
+    "hints": {
+      "en": [
+        "The two outer bowls have very different jobs in this puzzle.",
+        "Use the triangle to deliver spare room toward the full outer bowl."
+      ],
+      "zh": [
+        "两只外围马桶在这一关承担不同任务。",
+        "利用三角形，把余量送往装得更满的那一头。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-16",
+    "name": {
+      "en": "VIP Restroom",
+      "zh": "贵宾洗手间"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "The fancy lounge has a rather crowded tail.",
+      "zh": "贵宾区很体面，尾端却有点拥挤。"
     },
     "shape": "lollipop",
     "nodes": [
@@ -716,16 +1180,1152 @@
       80
     ],
     "threshold": 48,
-    "moveLimit": 16,
+    "moveLimit": 18,
     "optimalMoves": 16,
     "hints": {
       "en": [
-        "The triangle is a buffer. The farthest toilet depends entirely on its neighbor.",
-        "Prepare room before each transfer; the biggest number is not always the best next move."
+        "The coolest bowl sits in the triangle, away from the full tail.",
+        "Making the last bowl safe can overload its neighbor; plan the next correction."
       ],
       "zh": [
-        "三角区是缓冲区，最远的马桶完全依赖它的邻居。",
-        "每次分担前先腾出空间，数值最大的马桶不一定是下一步的最佳选择。"
+        "最低水位在三角形里，离满满的尾端有一段路。",
+        "让最后一只达标时，邻居可能超标，要提前安排下一步。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-17",
+    "name": {
+      "en": "The Janitor’s Fork",
+      "zh": "保洁员的岔路"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "The busiest junction starts completely full.",
+      "zh": "最忙的岔路口，一开场就满了。"
+    },
+    "shape": "fork",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      57,
+      100,
+      70,
+      0,
+      30
+    ],
+    "threshold": 52,
+    "moveLimit": 19,
+    "optimalMoves": 17,
+    "hints": {
+      "en": [
+        "The empty branch is a valuable reserve for the full junction.",
+        "A useful branch may need to lend room more than once."
+      ],
+      "zh": [
+        "空分支是满水位路口的重要储备。",
+        "好用的分支可能需要不止一次地提供余量。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-18",
+    "name": {
+      "en": "Penthouse Plumbing",
+      "zh": "顶楼水管"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Most of the spare room is at the far end.",
+      "zh": "大部分余量，都藏在管道最远端。"
+    },
+    "shape": "lollipop",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      85,
+      77,
+      85,
+      65,
+      15
+    ],
+    "threshold": 66,
+    "moveLimit": 20,
+    "optimalMoves": 18,
+    "hints": {
+      "en": [
+        "The low tail bowl must help an almost full triangle through two pipes.",
+        "Share the arriving spare room around the triangle before fetching more."
+      ],
+      "zh": [
+        "低水位尾端要跨过两条水管，帮助接近满载的三角区。",
+        "每次取来余量后，先让三角区合理分担，再继续取。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-19",
+    "name": {
+      "en": "Septic Staircase",
+      "zh": "化粪池阶梯"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Send the pressure down these porcelain steps.",
+      "zh": "沿着瓷器台阶，把压力一层层分散。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      100,
+      70,
+      45,
+      15,
+      5
+    ],
+    "threshold": 52,
+    "moveLimit": 21,
+    "optimalMoves": 19,
+    "hints": {
+      "en": [
+        "The two low end bowls are a reservoir, not just decorations.",
+        "Work back toward the high end after creating room in the middle."
+      ],
+      "zh": [
+        "末端两只低水位马桶，是值得用上的储备。",
+        "在中段腾好空间，再回头照顾高水位端。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-20",
+    "name": {
+      "en": "Rush-Hour Restroom",
+      "zh": "高峰洗手间"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Three crowded stalls have to share a long exit.",
+      "zh": "三个拥挤的厕位，共用一条长长的出口。"
+    },
+    "shape": "path6",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "F",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "initial": [
+      90,
+      90,
+      85,
+      55,
+      50,
+      35
+    ],
+    "threshold": 74,
+    "moveLimit": 22,
+    "optimalMoves": 20,
+    "hints": {
+      "en": [
+        "The first two bowls are equal, so their pipe does nothing at the start.",
+        "Bring spare room toward the crowded group before balancing within it."
+      ],
+      "zh": [
+        "开场前两只水位相同，它们之间的水管暂时无效。",
+        "先把余量送到拥挤区域，再在区域内部平衡。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-21",
+    "name": {
+      "en": "Midnight Maintenance",
+      "zh": "午夜检修"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "The quietest stall may be the key to the shift.",
+      "zh": "值夜班的关键，藏在最安静的厕位。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      100,
+      65,
+      55,
+      50,
+      15
+    ],
+    "threshold": 60,
+    "moveLimit": 23,
+    "optimalMoves": 21,
+    "hints": {
+      "en": [
+        "The last bowl holds most of the spare room.",
+        "The nearly full middle bowls need to pass that room along in stages."
+      ],
+      "zh": [
+        "最后一只马桶藏着大部分余量。",
+        "接近满载的中间马桶，需要分阶段传递这些余量。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-22",
+    "name": {
+      "en": "Sewer Express",
+      "zh": "下水道快车"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "A long route needs a return trip as well.",
+      "zh": "长长一趟管道行，还得安排返程。"
+    },
+    "shape": "path6",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "id": "F",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "initial": [
+      85,
+      65,
+      40,
+      40,
+      5,
+      0
+    ],
+    "threshold": 48,
+    "moveLimit": 24,
+    "optimalMoves": 22,
+    "hints": {
+      "en": [
+        "The low end can receive plenty, but reaching it takes preparation.",
+        "After sending waste outward, bring the newly available room back."
+      ],
+      "zh": [
+        "低水位端能接收不少污水，但送过去需要先铺好路。",
+        "向外分担之后，还要把腾出的余量传回来。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-23",
+    "name": {
+      "en": "Porcelain Bottleneck",
+      "zh": "瓷器瓶颈"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Only four bowls; almost no room for imbalance.",
+      "zh": "只有四只马桶，却几乎不能有偏差。"
+    },
+    "shape": "path4",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "initial": [
+      95,
+      80,
+      0,
+      0
+    ],
+    "threshold": 44,
+    "moveLimit": 25,
+    "optimalMoves": 23,
+    "hints": {
+      "en": [
+        "The average is 43.75%, only a quarter point below the limit.",
+        "Repeatedly refresh the cooler side before correcting the warmer side."
+      ],
+      "zh": [
+        "平均水位43.75%，离上限仅有0.25个百分点。",
+        "反复给较空的一侧补充余量，再修正较满的一侧。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-24",
+    "name": {
+      "en": "Six-Stall Shuffle",
+      "zh": "六厕位大调度"
+    },
+    "difficulty": "hard",
+    "tagline": {
+      "en": "Make every part of the queue earn its keep.",
+      "zh": "让队伍中的每一只马桶，都发挥作用。"
+    },
+    "shape": "path6",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "F",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "initial": [
+      85,
+      80,
+      50,
+      50,
+      20,
+      10
+    ],
+    "threshold": 56,
+    "moveLimit": 26,
+    "optimalMoves": 24,
+    "hints": {
+      "en": [
+        "The equal middle pair cannot help each other at the start.",
+        "Open space on the far side, then move that opportunity toward the first pair."
+      ],
+      "zh": [
+        "中间两只开场水位相同，暂时不能互相帮助。",
+        "先在远端腾出空间，再把机会传向开头那一对。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-25",
+    "name": {
+      "en": "The Last Spare Drop",
+      "zh": "最后一滴余量"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "The hot pair needs almost the whole network.",
+      "zh": "开头那对高水位，几乎得请全网帮忙。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      95,
+      95,
+      70,
+      60,
+      20
+    ],
+    "threshold": 70,
+    "moveLimit": 27,
+    "optimalMoves": 25,
+    "hints": {
+      "en": [
+        "Two equal 95% bowls need outside help before their shared pipe matters.",
+        "The end reservoir must help through several nearly full neighbors."
+      ],
+      "zh": [
+        "两只95%的马桶需要外援，之后它们之间的水管才有作用。",
+        "尾端储备要穿过几个接近满载的邻居，才能帮到前端。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-26",
+    "name": {
+      "en": "Golden Plunger Trial",
+      "zh": "金牌皮搋子试炼"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "Plenty of low bowls; one stubborn bottleneck.",
+      "zh": "低水位马桶不少，偏有个顽固瓶颈。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      95,
+      65,
+      15,
+      10,
+      10
+    ],
+    "threshold": 41,
+    "moveLimit": 28,
+    "optimalMoves": 26,
+    "hints": {
+      "en": [
+        "The three low bowls only help the first one through the same narrow route.",
+        "Prepare the next round of spare room before making the final corrections."
+      ],
+      "zh": [
+        "三只低水位马桶，都要经由同一条窄路帮助开头。",
+        "最后精调之前，先准备好下一轮可用的余量。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-27",
+    "name": {
+      "en": "The Grand Pipe Tour",
+      "zh": "地下管网巡游"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "Six stops, one connected balancing act.",
+      "zh": "六个站点，完成一次连贯的平衡之旅。"
+    },
+    "shape": "path6",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "F",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "initial": [
+      90,
+      80,
+      65,
+      50,
+      15,
+      0
+    ],
+    "threshold": 57,
+    "moveLimit": 29,
+    "optimalMoves": 27,
+    "hints": {
+      "en": [
+        "Every section of this route can contribute spare room.",
+        "A second wave of careful returns can matter more than one long outward sweep."
+      ],
+      "zh": [
+        "这条路线的每一段，都能参与分担。",
+        "第二轮细致的回传，有时比一口气向外推更重要。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-28",
+    "name": {
+      "en": "Porcelain Marathon",
+      "zh": "瓷器马拉松"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "No empty bowls, just small differences to use.",
+      "zh": "没有空马桶，只能精打细算每一点差值。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      90,
+      80,
+      70,
+      50,
+      40
+    ],
+    "threshold": 67,
+    "moveLimit": 30,
+    "optimalMoves": 28,
+    "hints": {
+      "en": [
+        "The average is 66%; the 67% limit leaves only a small cushion.",
+        "Small differences still move useful spare room when mixed in the right order."
+      ],
+      "zh": [
+        "平均水位66%，67%的上限只留下一点缓冲。",
+        "顺序合适时，小小水位差也能传递有用的余量。"
+      ]
+    }
+  },
+  {
+    "id": "campaign-29",
+    "name": {
+      "en": "Flushmaster’s Exam",
+      "zh": "冲水大师考场"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "Every bowl is busy, and the clock is unforgiving.",
+      "zh": "每只马桶都不闲着，步数也越来越紧。"
+    },
+    "shape": "path5",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "initial": [
+      100,
+      85,
+      65,
+      60,
+      45
+    ],
+    "threshold": 72,
+    "moveLimit": 31,
+    "optimalMoves": 29,
+    "hints": {
+      "en": [
+        "The 355% total must fit below a 72% ceiling in every bowl.",
+        "Before a late mix, check whether it will make the receiving neighbor unsafe again."
+      ],
+      "zh": [
+        "总计355%的污水，要让每只都不超过72%。",
+        "收尾前想一想：这次混合会不会让接收方再次超标？"
+      ]
+    }
+  },
+  {
+    "id": "campaign-30",
+    "name": {
+      "en": "Royal Flush",
+      "zh": "皇家大冲关"
+    },
+    "difficulty": "master",
+    "tagline": {
+      "en": "One last royal route. Earn the grand finale.",
+      "zh": "最后一条皇家管道，冲向盛大收官。"
+    },
+    "shape": "path6",
+    "nodes": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "B",
+        "x": 1,
+        "y": 0
+      },
+      {
+        "id": "C",
+        "x": 1,
+        "y": 0.5
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 0.5
+      },
+      {
+        "id": "E",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "id": "F",
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "initial": [
+      75,
+      65,
+      45,
+      40,
+      10,
+      0
+    ],
+    "threshold": 44,
+    "moveLimit": 32,
+    "optimalMoves": 30,
+    "hints": {
+      "en": [
+        "Plan the journey outward and the return of spare room together.",
+        "Keep enough moves to settle the high starting bowls after the distant end has helped."
+      ],
+      "zh": [
+        "向外分担与余量回传，需要一起规划。",
+        "远端提供帮助后，还要留够步数，让开头的高水位安稳达标。"
       ]
     }
   }

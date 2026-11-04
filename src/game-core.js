@@ -21,13 +21,15 @@ const FlushRules = Object.freeze({
   percent(value, threshold = Infinity) {
     if (!Number.isFinite(value)) return '–';
     if (Number.isInteger(value)) return String(value);
-    let places = 1;
-    while (places < 7) {
-      const displayed = Number(value.toFixed(places));
-      if ((value <= threshold) === (displayed <= threshold) && (value === 0 || displayed > 0)) break;
-      places++;
+    for (let places = 1; places <= 15; places++) {
+      const rounded = value.toFixed(places), displayed = Number(rounded);
+      if ((value <= threshold) === (displayed <= threshold) && (value === 0 || displayed > 0)) {
+        return rounded.replace(/0+$/, '').replace(/\.$/, '');
+      }
     }
-    return value.toFixed(places).replace(/0+$/, '').replace(/\.$/, '');
+    // At sub-decimal precision, the round-trip representation still preserves
+    // both a positive amount and its true side of the inclusive threshold.
+    return String(value);
   },
   validate(level) {
     if (!level || level.initial.length !== level.nodes.length || level.nodes.length < 2) throw new Error('Invalid toilets');

@@ -20,14 +20,21 @@ def build_bytes() -> bytes:
     template = (ROOT / "src" / "template.html").read_bytes()
     level_data = (ROOT / "data" / "levels.json").read_bytes()
     levels = json.loads(level_data)
-    if not isinstance(levels, list) or len(levels) != 10:
-        raise ValueError("The testing campaign must contain exactly 10 levels.")
+    if not isinstance(levels, list) or len(levels) != 30:
+        raise ValueError("The campaign must contain exactly 30 levels.")
+    if len({level["id"] for level in levels}) != len(levels):
+        raise ValueError("Every campaign level must have a unique ID.")
+    if any(a["optimalMoves"] >= b["optimalMoves"] for a, b in zip(levels, levels[1:])):
+        raise ValueError("The verified minimum move count must increase at every level.")
     if b"</script" in level_data.lower():
         raise ValueError("Level data must not contain an unescaped closing script tag.")
     substitutions = {
         b"__LEVEL_DATA__": level_data,
         b"__RULES_CODE__": (ROOT / "src" / "game-core.js").read_bytes(),
         b"__TOILET_CODE__": (ROOT / "src" / "toilet-visual.js").read_bytes(),
+        b"__CAMPAIGN_CODE__": (ROOT / "src" / "campaign.js").read_bytes(),
+        b"__LEGACY_CODE__": (ROOT / "src" / "legacy-levels.js").read_bytes(),
+        b"__SHARE_CODE__": (ROOT / "src" / "share.js").read_bytes(),
     }
     for token, content in substitutions.items():
         if template.count(token) != 1:

@@ -12,6 +12,7 @@ const context = vm.createContext({});
 vm.runInContext(fs.readFileSync(path.join(source, 'game-core.js'), 'utf8'), context);
 const layout = vm.runInContext('flushGeometry', context);
 const levels = JSON.parse(fs.readFileSync(path.join(root, 'data', 'levels.json'), 'utf8'));
+assert.equal(levels.length,30,'responsive geometry covers the complete thirty-level campaign');
 const widths = [...new Set([
   ...Array.from({length:64}, (_, i) => 270 + 10*i),
   293,342,348,519,521,1024
@@ -42,9 +43,12 @@ for (const width of widths) {
   for (const level of levels) {
     const {w,h,points} = layout(level, width);
     const tag = `${level.id} at width ${width}`;
+    assert.equal(w,width,`${tag}: board preserves its available width`);
+    assert.equal(points.length,level.nodes.length,`${tag}: one position per toilet`);
     assert(Number.isFinite(h) && h<950, `${tag}: solver exhausted its bounds`);
     for (let i=0;i<points.length;i++) {
       const p=points[i];
+      assert(Number.isFinite(p.x)&&Number.isFinite(p.y),`${tag}: finite toilet coordinates`);
       assert(p.x-42>=0 && p.x+42<=w, `${tag}: toilet ${i} horizontal clipping`);
       assert(p.y-69.5>=0 && p.y+69.5<=h, `${tag}: toilet ${i} vertical clipping`);
       for (let j=0;j<i;j++) {
